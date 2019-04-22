@@ -1,0 +1,22 @@
+{
+  "name": "teacherspet",
+  "version": "1.0.0",
+  "description": "Teacher-centric class tracking app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CodeNoob25/teachersPet.git"
+  },
+  "keywords": [
+    "Teaching"
+  ],
+  "author": "Justin Poser",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CodeNoob25/teachersPet/issues"
+  },
+  "homepage": "https://github.com/CodeNoob25/teachersPet#readme"
+}
