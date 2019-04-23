@@ -1,0 +1,31 @@
+
+const express = require("express");
+const bodyParser = require("body-parser");
+// const router = require("./router/routes");
+const path = require("path");
+const comp = require("compression");
+
+const app = express();
+
+app.use(comp());
+
+// app.use(function(req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header(
+//     "Access-Control-Allow-Headers",
+//     "Origin, X-Requested-With, Content-Type, Accept"
+//   );
+//   next();
+// });
+
+
+app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, "../Client/dist/")));
+
+// app.use(router);
+
+const port = process.env.PORT || 3000;
+
+app.listen(port, function() {
+  console.log("teachersPet server active " + port);
+});
