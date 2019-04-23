@@ -3,11 +3,11 @@ const express = require("express");
 const bodyParser = require("body-parser");
 // const router = require("./router/routes");
 const path = require("path");
-const comp = require("compression");
+// const comp = require("compression");
 
 const app = express();
 
-app.use(comp());
+
 
 // app.use(function(req, res, next) {
 //   res.header("Access-Control-Allow-Origin", "*");
@@ -18,7 +18,7 @@ app.use(comp());
 //   next();
 // });
 
-
+// app.use(comp());
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, "../Client/dist/")));
 
@@ -26,6 +26,10 @@ app.use(express.static(path.join(__dirname, "../Client/dist/")));
 
 const port = process.env.PORT || 3000;
 
-app.listen(port, function() {
+app.get('/test', (req, res) => {
+    res.send('test successful')
+})
+
+app.listen(port, () => {
   console.log("teachersPet server active " + port);
 });
