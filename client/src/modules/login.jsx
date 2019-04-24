@@ -1,7 +1,10 @@
 
 import React from "react";
+import { Input, Button } from 'semantic-ui-react';
 
-class App extends React.Component {
+
+
+class Login extends React.Component {
     constructor(props) {
       super(props);
         
@@ -11,8 +14,11 @@ class App extends React.Component {
     render() {
       return (
         <div>
-            <h1> test successful</h1>
+            <Input placeholder='Search...' />
         </div>    
       )
     }
   }
+
+
+export default Login;

@@ -25,14 +25,12 @@
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.5",
     "body-parser": "^1.18.3",
-    "braces": "^2.3.2",
     "express": "^4.16.4",
-    "minimatch": "^3.0.4",
     "nodemon": "^1.18.11",
     "path": "^0.12.7",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "semantic-ui": "^2.4.2",
+    "semantic-ui-react": "^0.86.0",
     "webpack": "^4.30.0"
   },
   "devDependencies": {
