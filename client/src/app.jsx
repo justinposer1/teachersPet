@@ -1,7 +1,8 @@
 
-import React from "react";
-import ReactDOM from "react-dom";
-// import axios from "axios";
+import React from 'react';
+import ReactDOM from 'react-dom';
+// import axios from 'axios';
+import Login from './modules/login.jsx'
 
 
 class App extends React.Component {
@@ -13,9 +14,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
-          <h1> test successful</h1>
-      </div>    
+      <Login></Login>
     )
   }
 }
