@@ -1,6 +1,6 @@
 
 import React from "react";
-import { Input, Button } from 'semantic-ui-react';
+import { Input, Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react';
 
 class Login extends React.Component {
     constructor(props) {
@@ -20,7 +20,6 @@ class Login extends React.Component {
     }
 
     changeDisplayed() {
-        console.log(this.state)
         this.setState({
             displayed: this.state.input
         })
@@ -28,10 +27,37 @@ class Login extends React.Component {
 
     render() {
       return (
-        <div>
-            <Input placeholder='Search...' onChange={this.changeInput}/>
+        <div className='login-form'>
+        
+        <Grid textAlign='center' style={{ height: '100%' }} verticalAlign='middle'>
+          <Grid.Column style={{ maxWidth: 450 }}>
+            <Header as='h2' color='teal' textAlign='center'>
+              {/* <Image src='/logo.png' /> Log-in to your account */}
+            </Header>
+            <Form size='large'>
+              <Segment stacked>
+                <Form.Input fluid icon='user' iconPosition='left' placeholder='E-mail address' />
+                <Form.Input
+                  fluid
+                  icon='lock'
+                  iconPosition='left'
+                  placeholder='Password'
+                  type='password'
+                />
+    
+                <Button color='teal' fluid size='large'>
+                  Login
+                </Button>
+              </Segment>
+            </Form>
+            <Message>
+              New to us? <a href='#'>Sign Up</a>
+            </Message>
+          </Grid.Column>
+        </Grid>
+            {/* <Input placeholder='Search...' onChange={this.changeInput}/>
             <Button onClick={this.changeDisplayed}/>
-            <h2> hi {this.state.displayed}</h2>
+            <h2> hi {this.state.displayed}</h2> */}
         </div>    
       )
     }
@@ -39,3 +65,12 @@ class Login extends React.Component {
 
 
 export default Login;
+
+{/* <style>{`
+          body > div,
+          body > div > div,
+          body > div > div > div.login-form {
+            height: 100%;
+          }
+        `}
+        </style> */}
