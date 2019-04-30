@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
     Icon,
   Input,
@@ -9,7 +9,8 @@ import {
   Image,
   Message,
   Segment
-} from "semantic-ui-react";
+} from 'semantic-ui-react';
+import axios from 'axios';
 
 class Login extends React.Component {
   constructor(props) {
@@ -36,45 +37,45 @@ class Login extends React.Component {
 
   render() {
     return (
-      <div className="login-form">
+      <div className='login-form'>
         <Grid
-          textAlign="center"
-          style={{ height: "100%", marginTop: "3em" }}
-          verticalAlign="middle"
+          textAlign='center'
+          style={{ height: '100%', marginTop: '3em' }}
+          verticalAlign='middle'
         >
           <Grid.Column style={{ maxWidth: 450 }}>
             <div>
-              <Header as="h2" icon textAlign="center">
-                <Icon name="student" circular />
+              <Header as='h2' icon textAlign='center'>
+                <Icon name='student' circular />
                 <Header.Content>teachersPet</Header.Content>
               </Header>
             </div>
-            <Header as="h2" color="teal" textAlign="center">
+            <Header as='h2' color='teal' textAlign='center'>
                Log into your account
             </Header>
-            <Form size="large">
+            <Form size='large'>
               <Segment stacked>
                 <Form.Input
                   fluid
-                  icon="user"
-                  iconPosition="left"
-                  placeholder="E-mail address"
+                  icon='user'
+                  iconPosition='left'
+                  placeholder='E-mail address'
                 />
                 <Form.Input
                   fluid
-                  icon="lock"
-                  iconPosition="left"
-                  placeholder="Password"
-                  type="password"
+                  icon='lock'
+                  iconPosition='left'
+                  placeholder='Password'
+                  type='password'
                 />
 
-                <Button color="teal" fluid size="large">
+                <Button color='teal' fluid size='large'>
                   Login
                 </Button>
               </Segment>
             </Form>
             <Message>
-            Once your admin has verified your email, create an account <a href="#">here</a>!
+            Once your admin has verified your email, create an account <a href='#'>here</a>!
             </Message>
           </Grid.Column>
         </Grid>
