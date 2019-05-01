@@ -2,8 +2,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 // import axios from 'axios';
-import Login from './modules/login.jsx';
-import CreationLogin from './modules/creationLogin.jsx';
+import Login from './modules/loginModules/login.jsx';
+import CreationLogin from './modules/loginModules/creationLogin.jsx';
 import '../../node_modules/semantic-ui-css/semantic.min.css';
 
 
@@ -11,13 +11,13 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentView: 'Login',
+      currentView: 'CreationLogin',
       theme: 'default'
     }
 
     this.changeView = this.changeView.bind(this);
     this.changeTheme = this.changeTheme.bind(this);
-    let propsPackage = {
+    this.propsPackage = {
       changeView: this.changeView,
       theme: this.theme
     }
@@ -38,7 +38,7 @@ class App extends React.Component {
   render() {
     if (this.state.currentView === 'Login') {
       return (
-        <Login/>
+        <Login propsPackage={this.propsPackage}/>
       )
     } else if (this.state.currentView === 'CreationLogin') {
       return (
