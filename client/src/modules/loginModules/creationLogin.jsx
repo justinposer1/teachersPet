@@ -20,11 +20,27 @@ class CreationLogin extends React.Component {
     super(props);
     this.state = {
       step: 0,
-      schoolName: null,
+      schoolName: '',
       gradeLevels: [],
       verifiedEmails: {},
       verifiedCode: false
     };
+
+    this.moveStep = this.moveStep.bind(this);
+  }
+
+  moveStep(num) {
+    this.setState({step: this.state.step + num})
+  }
+
+  setAttribute(category, input) {
+    if (category === 'schoolName') {
+      this.setState({ schoolName: input});
+    } else if (category === 'gradeLevels') {
+      this.state.gradeLevels.push(input);
+    } else if (category === 'verifiedEmails') {
+      this.state.gradeLevels[input] = true;
+    }
   }
 
   render() {
@@ -32,7 +48,7 @@ class CreationLogin extends React.Component {
       <div className="creation-form">
             <Grid
               textAlign="center"
-              style={{ height: "100%", marginTop: "3em" }}
+              style={{ height: "100%", marginTop: "3em", marginBottom: "10em" }}
               verticalAlign="middle"
             >
               <Grid.Column style={{ maxWidth: 450 }}>
@@ -43,37 +59,27 @@ class CreationLogin extends React.Component {
                   </Header>
                 </div>
                 <Header as="h2" color="teal" textAlign="center">
-                  Log into your account
+                  Follow the instructions to set up your school's site on teachersPet:
                 </Header>
                 <Form size="large">
                   <Segment stacked>
                     <Form.Input
                       fluid
-                      icon="user"
+                      icon="building outline"
                       iconPosition="left"
-                      placeholder="E-mail address"
-                    />
-                    <Form.Input
-                      fluid
-                      icon="lock"
-                      iconPosition="left"
-                      placeholder="Password"
-                      type="password"
+                      placeholder="enter your school's name"
                     />
 
-                    <Button color="teal" fluid size="large">
-                      Login
+                    <Button color="teal" fluid size="large" onClick={() => this.moveStep(1)} style={{ marginTop: "3em" }}>
+                      Submit school name
                     </Button>
+                    
                   </Segment>
                 </Form>
-                <Message>
-                  Once your admin has verified your email, create an account{" "}
-                  <a href="#">here</a>!
-                </Message>
                 
               </Grid.Column>
             </Grid>
-            <CompletionBar/>
+            <CompletionBar step={this.state.step} moveStep={this.moveStep}/>
           </div>
     )
   }
