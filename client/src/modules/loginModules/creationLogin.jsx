@@ -23,7 +23,8 @@ class CreationLogin extends React.Component {
       schoolName: '',
       gradeLevels: [],
       verifiedEmails: {},
-      verifiedCode: false
+      verifiedCode: false,
+      input: null
     };
 
     this.moveStep = this.moveStep.bind(this);
@@ -43,15 +44,17 @@ class CreationLogin extends React.Component {
     }
   }
 
+  changeInput(e) {
+    this.setState({
+      input: e.target.value
+    });
+  }
+
   render() {
     return (
       <div className="creation-form">
-            <Grid
-              textAlign="center"
-              style={{ height: "100%", marginTop: "3em", marginBottom: "10em" }}
-              verticalAlign="middle"
-            >
-              <Grid.Column style={{ maxWidth: 450 }}>
+            <Grid textAlign="center" style={{ height: "100%", marginTop: "3em", marginBottom: "10em" }} verticalAlign="middle">
+              <Grid.Column style={{ maxWidth: 600 }}>
                 <div>
                   <Header as="h2" icon textAlign="center">
                     <Icon name="student" circular />
@@ -63,12 +66,7 @@ class CreationLogin extends React.Component {
                 </Header>
                 <Form size="large">
                   <Segment stacked>
-                    <Form.Input
-                      fluid
-                      icon="building outline"
-                      iconPosition="left"
-                      placeholder="enter your school's name"
-                    />
+                    <Form.Input fluid icon="building outline" iconPosition="left" placeholder="enter your school's name"/>
 
                     <Button color="teal" fluid size="large" onClick={() => this.moveStep(1)} style={{ marginTop: "3em" }}>
                       Submit school name
