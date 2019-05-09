@@ -24,10 +24,12 @@ class CreationLogin extends React.Component {
       gradeLevels: [],
       verifiedEmails: {},
       verifiedCode: false,
-      input: null
+      input: null,
+      buttonContent: null
     };
 
     this.moveStep = this.moveStep.bind(this);
+    this.changeInput = this.changeInput.bind(this);
   }
 
   moveStep(num) {
@@ -66,7 +68,7 @@ class CreationLogin extends React.Component {
                 </Header>
                 <Form size="large">
                   <Segment stacked>
-                    <Form.Input fluid icon="building outline" iconPosition="left" placeholder="enter your school's name"/>
+                    <Form.Input fluid icon="building outline" iconPosition="left" placeholder="enter your school's name" onChange={this.changeInput}/>
 
                     <Button color="teal" fluid size="large" onClick={() => this.moveStep(1)} style={{ marginTop: "3em" }}>
                       Submit school name
