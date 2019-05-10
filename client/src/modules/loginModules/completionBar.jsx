@@ -25,8 +25,8 @@ const CompletionBar = props => {
           <Step active>
             <Icon name="users" />
             <Step.Content>
-              <Step.Title>Approved Staff</Step.Title>
-              <Step.Description>Enter emails of staff members</Step.Description>
+              <Step.Title>Authentication</Step.Title>
+              <Step.Description>Enter the code provided by teachersPet</Step.Description>
             </Step.Content>
           </Step>
         </Step.Group>
@@ -53,8 +53,8 @@ const CompletionBar = props => {
           <Step active>
             <Icon name="users" />
             <Step.Content>
-              <Step.Title>Approved Staff</Step.Title>
-              <Step.Description>Enter emails of staff members</Step.Description>
+            <Step.Title>Authentication</Step.Title>
+              <Step.Description>Enter the code provided by teachersPet</Step.Description>
             </Step.Content>
           </Step>
         </Step.Group>
@@ -80,8 +80,8 @@ const CompletionBar = props => {
           <Step active>
             <Icon name="users" />
             <Step.Content>
-              <Step.Title>Approved Staff</Step.Title>
-              <Step.Description>Enter emails of staff members</Step.Description>
+            <Step.Title>Authentication</Step.Title>
+              <Step.Description>Enter the code provided by teachersPet</Step.Description>
             </Step.Content>
           </Step>
         </Step.Group>
