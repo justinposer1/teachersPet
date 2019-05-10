@@ -25,7 +25,8 @@ class CreationLogin extends React.Component {
       verifiedEmails: {},
       verifiedCode: false,
       input: null,
-      buttonContent: {icon: "building outline"}
+      warning: false,
+      formContent: {icon: "bulding outline", placeHolder: "enter your school's name"}
     };
 
     this.moveStep = this.moveStep.bind(this);
@@ -44,6 +45,7 @@ class CreationLogin extends React.Component {
     } else if (this.state.step === 2) {
       this.state.gradeLevels[input] = true;
     }
+    this.setState({warning: false})
   }
 
   changeInput(e) {
@@ -53,10 +55,11 @@ class CreationLogin extends React.Component {
   }
 
   buttonPress() {
-    this.setAttribute(this.state.input);
-    if (this.state.step !== 1) {
-      this.moveStep(1);
+    if (!this.state.input) {
+      this.setState({warning: true})
     }
+    this.setAttribute(this.state.input);
+    this.moveStep(1);
     
   }
 
@@ -76,7 +79,11 @@ class CreationLogin extends React.Component {
                 </Header>
                 <Form size="large">
                   <Segment stacked>
-                    <Form.Input fluid icon={this.state.buttonContent.icon} iconPosition="left" placeholder="enter your school's name" onChange={(e) => this.changeInput(e)}/>
+                    <Form.Input fluid icon={this.state.formContent.icon} iconPosition="left" placeholder={this.state.formContent.placeHolder} onChange={(e) => this.changeInput(e)}/>
+
+                    <Button color="teal" fluid size="large" onClick={() => this.buttonPress()} style={{ marginTop: "3em" }} hidden={true}>
+                      Submit school name
+                    </Button>
 
                     <Button color="teal" fluid size="large" onClick={() => this.buttonPress()} style={{ marginTop: "3em" }}>
                       Submit school name

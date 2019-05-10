@@ -23,7 +23,7 @@ const CompletionBar = props => {
           </Step>
 
           <Step active>
-            <Icon name="users" />
+            <Icon name="lock" />
             <Step.Content>
               <Step.Title>Authentication</Step.Title>
               <Step.Description>Enter the code provided by teachersPet</Step.Description>
@@ -51,7 +51,7 @@ const CompletionBar = props => {
           </Step>
 
           <Step active>
-            <Icon name="users" />
+            <Icon name="lock" />
             <Step.Content>
             <Step.Title>Authentication</Step.Title>
               <Step.Description>Enter the code provided by teachersPet</Step.Description>
@@ -78,7 +78,7 @@ const CompletionBar = props => {
             </Step.Content>
           </Step>
           <Step active>
-            <Icon name="users" />
+            <Icon name="lock" />
             <Step.Content>
             <Step.Title>Authentication</Step.Title>
               <Step.Description>Enter the code provided by teachersPet</Step.Description>
