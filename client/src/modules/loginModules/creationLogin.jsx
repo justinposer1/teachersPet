@@ -25,7 +25,7 @@ class CreationLogin extends React.Component {
       verifiedEmails: {},
       verifiedCode: false,
       input: null,
-      buttonContent: null
+      buttonContent: {icon: "building outline"}
     };
 
     this.moveStep = this.moveStep.bind(this);
@@ -36,12 +36,12 @@ class CreationLogin extends React.Component {
     this.setState({step: this.state.step + num})
   }
 
-  setAttribute(category, input) {
-    if (category === 'schoolName') {
+  setAttribute(input) {
+    if (this.state.step === 0) {
       this.setState({ schoolName: input});
-    } else if (category === 'gradeLevels') {
+    } else if (this.state.step === 1) {
       this.state.gradeLevels.push(input);
-    } else if (category === 'verifiedEmails') {
+    } else if (this.state.step === 2) {
       this.state.gradeLevels[input] = true;
     }
   }
@@ -50,6 +50,14 @@ class CreationLogin extends React.Component {
     this.setState({
       input: e.target.value
     });
+  }
+
+  buttonPress() {
+    this.setAttribute(this.state.input);
+    if (this.state.step !== 1) {
+      this.moveStep(1);
+    }
+    
   }
 
   render() {
@@ -68,9 +76,9 @@ class CreationLogin extends React.Component {
                 </Header>
                 <Form size="large">
                   <Segment stacked>
-                    <Form.Input fluid icon="building outline" iconPosition="left" placeholder="enter your school's name" onChange={this.changeInput}/>
+                    <Form.Input fluid icon={this.state.buttonContent.icon} iconPosition="left" placeholder="enter your school's name" onChange={(e) => this.changeInput(e)}/>
 
-                    <Button color="teal" fluid size="large" onClick={() => this.moveStep(1)} style={{ marginTop: "3em" }}>
+                    <Button color="teal" fluid size="large" onClick={() => this.buttonPress()} style={{ marginTop: "3em" }}>
                       Submit school name
                     </Button>
                     
@@ -79,7 +87,7 @@ class CreationLogin extends React.Component {
                 
               </Grid.Column>
             </Grid>
-            <CompletionBar step={this.state.step} moveStep={this.moveStep}/>
+            <CompletionBar step={this.state.step} moveStep={this.moveStep} schoolName={this.state.schoolName}/>
           </div>
     )
   }
