@@ -6,7 +6,7 @@ const CompletionBar = props => {
     case 0:
       return (
         <Step.Group fluid>
-          <Step active>
+          <Step className={props.active ? "example active" : "example completed"}>
             <Icon name="building outline" />
             <Step.Content>
               <Step.Title>School Name</Step.Title>

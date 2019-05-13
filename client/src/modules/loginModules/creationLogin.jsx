@@ -9,7 +9,8 @@ import {
   Image,
   Message,
   Segment,
-  Step
+  Step,
+  Visibility
 } from "semantic-ui-react";
 import CompletionBar from "./completionBar.jsx"
 import axios from "axios";
@@ -26,7 +27,8 @@ class CreationLogin extends React.Component {
       verifiedCode: false,
       input: null,
       warning: false,
-      formContent: {icon: "bulding outline", placeHolder: "enter your school's name"}
+      formContent: {icon: "building outline", placeHolder: "enter your school's name"},
+      active: true
     };
 
     this.moveStep = this.moveStep.bind(this);
@@ -44,6 +46,8 @@ class CreationLogin extends React.Component {
       this.state.gradeLevels.push(input);
     } else if (this.state.step === 2) {
       this.state.gradeLevels[input] = true;
+    } else if (this.state.step === 3) {
+      // fill in authentication logic
     }
     this.setState({warning: false})
   }
@@ -54,13 +58,13 @@ class CreationLogin extends React.Component {
     });
   }
 
-  buttonPress() {
+  submit() {
     if (!this.state.input) {
-      this.setState({warning: true})
+      this.setState({warning: true, active: false})
+    } else {
+      this.setAttribute(this.state.input);
+      this.moveStep(1);
     }
-    this.setAttribute(this.state.input);
-    this.moveStep(1);
-    
   }
 
   render() {
@@ -81,12 +85,12 @@ class CreationLogin extends React.Component {
                   <Segment stacked>
                     <Form.Input fluid icon={this.state.formContent.icon} iconPosition="left" placeholder={this.state.formContent.placeHolder} onChange={(e) => this.changeInput(e)}/>
 
-                    <Button color="teal" fluid size="large" onClick={() => this.buttonPress()} style={{ marginTop: "3em" }} hidden={true}>
+                    <Button color="teal" fluid size="large" onClick={() => this.submit()} style={{ marginTop: "3em" }}>
                       Submit school name
                     </Button>
 
-                    <Button color="teal" fluid size="large" onClick={() => this.buttonPress()} style={{ marginTop: "3em" }}>
-                      Submit school name
+                    <Button color="teal" fluid size="large" onClick={() => this.submit()} style={{ marginTop: "3em" }} style={{visibility: false ? "hidden" : "visible"}}>
+                      Submit email
                     </Button>
                     
                   </Segment>
@@ -94,7 +98,7 @@ class CreationLogin extends React.Component {
                 
               </Grid.Column>
             </Grid>
-            <CompletionBar step={this.state.step} moveStep={this.moveStep} schoolName={this.state.schoolName}/>
+            <CompletionBar step={this.state.step} moveStep={this.moveStep} schoolName={this.state.schoolName} active={this.state.active}/>
           </div>
     )
   }
