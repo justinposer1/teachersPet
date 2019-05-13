@@ -21,11 +21,11 @@ class CreationLogin extends React.Component {
     super(props);
     this.state = {
       step: 0,
-      schoolName: '',
+      schoolName: "",
       gradeLevels: [],
       verifiedEmails: {},
       verifiedCode: false,
-      input: null,
+      input: "",
       warning: false,
       formContent: {0: {icon: "building outline", placeHolder: "enter your school's name", text: "Submit your school's name"}, 1: {icon: "building outline", placeHolder: "enter your school's grade levels", text: "Submit your school's grade levels", text2: "Add grade level"}}
     };
@@ -48,13 +48,11 @@ class CreationLogin extends React.Component {
     } else if (this.state.step === 3) {
       // fill in authentication logic
     }
-    this.setState({warning: false})
+    this.setState({warning: false, input: ""})
   }
 
   changeInput(e) {
-    this.setState({
-      input: e.target.value
-    });
+    this.setState({input: e.target.value});
   }
 
   submit() {
@@ -82,7 +80,7 @@ class CreationLogin extends React.Component {
                 </Header>
                 <Form size="large">
                   <Segment stacked>
-                    <Form.Input fluid icon={this.state.formContent[this.state.step].icon} iconPosition="left" placeholder={this.state.formContent[this.state.step].placeHolder} onChange={(e) => this.changeInput(e)}/>
+                    <Form.Input fluid icon={this.state.formContent[this.state.step].icon} value={this.state.input} iconPosition="left" placeholder={this.state.formContent[this.state.step].placeHolder} onChange={(e) => this.changeInput(e)}/>
 
                     <Button color="teal" fluid size="large" onClick={() => this.submit()} style={{ marginTop: "3em" }} style={{visibility: this.state.step === 1 ? "visible" : "hidden"}}>
                     {this.state.formContent[this.state.step].text2}
@@ -99,7 +97,7 @@ class CreationLogin extends React.Component {
                 
               </Grid.Column>
             </Grid>
-            <CompletionBar step={this.state.step} moveStep={this.moveStep} schoolName={this.state.schoolName} active={this.state.active}/>
+            <CompletionBar step={this.state.step} moveStep={this.moveStep} schoolName={this.state.schoolName} gradeLevels={this.state.gradeLevels} verifiedEmails={this.state.verifiedEmails}/>
           </div>
     )
   }

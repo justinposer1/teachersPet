@@ -12,15 +12,23 @@ const CompletionBar = props => {
         </Step.Content>
       </Step>
 
-      <Step active>
-        <Icon name="users" />
+      <Step className={props.step < 2 ? "active" : "completed"}>
+        <Icon name="book" />
         <Step.Content>
-          <Step.Title>Approved Staff</Step.Title>
-          <Step.Description>Enter emails of staff members</Step.Description>
+          <Step.Title>Grade Levels</Step.Title>
+          <Step.Description> {props.step < 2 ?  "Input your school's grade levels" : `Grades: ${props.gradeLevels}`} </Step.Description>
         </Step.Content>
       </Step>
 
-      <Step active>
+      <Step className={props.step < 3 ? "active" : "completed"}>
+        <Icon name="users" />
+        <Step.Content>
+          <Step.Title>Approved Staff</Step.Title>
+          <Step.Description> {props.step < 3 ? "Input staff emails" : `${Object.keys(props.verifiedEmails).length} approved staff members`} </Step.Description>
+        </Step.Content>
+      </Step>
+
+      <Step className={props.step < 4 ? "active" : "completed"}>
         <Icon name="lock" />
         <Step.Content>
           <Step.Title>Authentication</Step.Title>
