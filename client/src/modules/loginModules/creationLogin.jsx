@@ -27,7 +27,7 @@ class CreationLogin extends React.Component {
       verifiedCode: false,
       input: null,
       warning: false,
-      formContent: {0: {icon: "building outline", placeHolder: "enter your school's name", text: "Submit your school's name"}, 1: {icon: "building outline", placeHolder: "enter your school's name", text: "Submit your school's name"}},
+      formContent: {0: {icon: "building outline", placeHolder: "enter your school's name", text: "Submit your school's name"}, 1: {icon: "building outline", placeHolder: "enter your school's grade levels", text: "Submit your school's grade levels", text2: "Add grade level"}},
       active: true
     };
 
@@ -45,7 +45,7 @@ class CreationLogin extends React.Component {
     } else if (this.state.step === 1) {
       this.state.gradeLevels.push(input);
     } else if (this.state.step === 2) {
-      this.state.gradeLevels[input] = true;
+      this.state.verifiedEmails[input] = true;
     } else if (this.state.step === 3) {
       // fill in authentication logic
     }
@@ -85,13 +85,15 @@ class CreationLogin extends React.Component {
                   <Segment stacked>
                     <Form.Input fluid icon={this.state.formContent[this.state.step].icon} iconPosition="left" placeholder={this.state.formContent[this.state.step].placeHolder} onChange={(e) => this.changeInput(e)}/>
 
+                    <Button color="teal" fluid size="large" onClick={() => this.submit()} style={{ marginTop: "3em" }} style={{visibility: this.state.step === 1 ? "visible" : "hidden"}}>
+                    {this.state.formContent[this.state.step].text2}
+                    </Button>
+
                     <Button color="teal" fluid size="large" onClick={() => this.submit()} style={{ marginTop: "3em" }}>
                       {this.state.formContent[this.state.step].text}
                     </Button>
 
-                    <Button color="teal" fluid size="large" onClick={() => this.submit()} style={{ marginTop: "3em" }} style={{visibility: false ? "hidden" : "visible"}}>
-                      Submit email
-                    </Button>
+                    
                     
                   </Segment>
                 </Form>
