@@ -27,8 +27,7 @@ class CreationLogin extends React.Component {
       verifiedCode: false,
       input: null,
       warning: false,
-      formContent: {0: {icon: "building outline", placeHolder: "enter your school's name", text: "Submit your school's name"}, 1: {icon: "building outline", placeHolder: "enter your school's grade levels", text: "Submit your school's grade levels", text2: "Add grade level"}},
-      active: true
+      formContent: {0: {icon: "building outline", placeHolder: "enter your school's name", text: "Submit your school's name"}, 1: {icon: "building outline", placeHolder: "enter your school's grade levels", text: "Submit your school's grade levels", text2: "Add grade level"}}
     };
 
     this.moveStep = this.moveStep.bind(this);
