@@ -27,7 +27,7 @@ class CreationLogin extends React.Component {
       verifiedCode: false,
       input: null,
       warning: false,
-      formContent: {icon: "building outline", placeHolder: "enter your school's name"},
+      formContent: {icon: "building outline", placeHolder: "enter your school's name", text: "Submit your school's name"},
       active: true
     };
 
@@ -42,6 +42,7 @@ class CreationLogin extends React.Component {
   setAttribute(input) {
     if (this.state.step === 0) {
       this.setState({ schoolName: input});
+      var newForm = {icon: "building outline", placeHolder: "enter your school's name", text: "Submit your school's name"}
     } else if (this.state.step === 1) {
       this.state.gradeLevels.push(input);
     } else if (this.state.step === 2) {
@@ -86,7 +87,7 @@ class CreationLogin extends React.Component {
                     <Form.Input fluid icon={this.state.formContent.icon} iconPosition="left" placeholder={this.state.formContent.placeHolder} onChange={(e) => this.changeInput(e)}/>
 
                     <Button color="teal" fluid size="large" onClick={() => this.submit()} style={{ marginTop: "3em" }}>
-                      Submit school name
+                      {this.state.formContent.text}
                     </Button>
 
                     <Button color="teal" fluid size="large" onClick={() => this.submit()} style={{ marginTop: "3em" }} style={{visibility: false ? "hidden" : "visible"}}>
