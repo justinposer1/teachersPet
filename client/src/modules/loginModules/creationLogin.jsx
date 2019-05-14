@@ -27,7 +27,7 @@ class CreationLogin extends React.Component {
       verifiedCode: false,
       input: "",
       warning: false,
-      formContent: {0: {icon: "building outline", placeHolder: "enter your school's name", text: "Submit your school's name"}, 1: {icon: "building outline", placeHolder: "enter your school's grade levels", text: "Submit your school's grade levels", text2: "Add grade level"}, 2: {icon: "users", placeHolder: "enter emails of staff members", text: "Submit approved emails", text2: "Add staff email"}, 2: {icon: "users", placeHolder: "enter code", text: "Verify"}}
+      formContent: {0: {icon: "building outline", placeHolder: "enter your school's name", text: "Submit your school's name"}, 1: {icon: "building outline", placeHolder: "enter your school's grade levels", text: "Submit your school's grade levels", text2: "Add grade level"}, 2: {icon: "users", placeHolder: "enter emails of staff members", text: "Submit approved emails", text2: "Add staff email"}, 3: {icon: "lock", placeHolder: "enter code", text: "Verify"}}
     };
 
     this.moveStep = this.moveStep.bind(this);
@@ -35,7 +35,7 @@ class CreationLogin extends React.Component {
   }
 
   moveStep(num) {
-    this.setState({step: this.state.step + num});
+    this.setState({step: this.state.step + num, input: ""});
   }
 
   setAttribute(input) {
@@ -43,8 +43,9 @@ class CreationLogin extends React.Component {
       this.setState({warning: true});
       return;
     } else if (this.state.step === 0) {
-      this.setState({ schoolName: input});
-      this.moveStep(1);
+      this.setState({ schoolName: input},() => {
+        moveStep(1)
+      });
     } else if (this.state.step === 1) {
       this.state.gradeLevels.push(input);
     } else if (this.state.step === 2) {
@@ -57,6 +58,14 @@ class CreationLogin extends React.Component {
 
   changeInput(e) {
     this.setState({input: e.target.value});
+  }
+
+  submit() {
+    if (this.state.step === 0) {
+      this.setAttribute(this.state.input);
+    } else {
+      this.moveStep(1);
+    }
   }
 
   render() {
@@ -77,11 +86,11 @@ class CreationLogin extends React.Component {
                   <Segment stacked>
                     <Form.Input fluid icon={this.state.formContent[this.state.step].icon} value={this.state.input} iconPosition="left" placeholder={this.state.formContent[this.state.step].placeHolder} onChange={(e) => this.changeInput(e)}/>
 
-                    <Button color="teal" fluid size="large" onClick={() => this.setAttribute(this.state.input)} style={{ marginTop: "3em" }} style={{visibility: this.state.step === 1 ? "visible" : "hidden"}}>
+                    <Button color="teal" fluid size="large" onClick={() => this.setAttribute(this.state.input)} style={{ marginTop: "3em" }} style={{visibility: this.state.step === 1 || this.state.step === 2 ? "visible" : "hidden"}}>
                     {this.state.formContent[this.state.step].text2}
                     </Button>
 
-                    <Button color="teal" fluid size="large" onClick={() => this.moveStep()} style={{ marginTop: "3em" }}>
+                    <Button color="teal" fluid size="large" onClick={() => this.moveStep(1)} style={{ marginTop: "3em" }}>
                       {this.state.formContent[this.state.step].text}
                     </Button>
 
