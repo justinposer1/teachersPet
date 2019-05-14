@@ -1,16 +1,13 @@
 import React from "react";
 import {
   Icon,
-  Input,
   Button,
   Form,
   Grid,
   Header,
-  Image,
-  Message,
   Segment,
-  Step,
-  Visibility
+  Menu,
+  Dropdown
 } from "semantic-ui-react";
 import CompletionBar from "./completionBar.jsx"
 import axios from "axios";
@@ -27,7 +24,7 @@ class CreationLogin extends React.Component {
       verifiedCode: false,
       input: "",
       warning: false,
-      formContent: {0: {icon: "building outline", placeHolder: "enter your school's name", text: "Submit your school's name"}, 1: {icon: "building outline", placeHolder: "enter your school's grade levels", text: "Submit your school's grade levels", text2: "Add grade level"}, 2: {icon: "users", placeHolder: "enter emails of staff members", text: "Submit approved emails", text2: "Add staff email"}, 3: {icon: "lock", placeHolder: "enter code", text: "Verify"}}
+      formContent: {0: {icon: "building outline", placeHolder: "enter your school's name", text: "Submit your school's name"}, 1: {icon: "building outline", placeHolder: "enter your school's grade levels", text: "Submit your school's grade levels", text2: "Add grade level"}, 2: {icon: "users", placeHolder: "enter emails of staff members", text: "Submit approved emails", text2: "Add staff email"}, 3: {icon: "lock", placeHolder: "enter the code sent to you by teachersPet", text: "Verify"}}
     };
 
     this.moveStep = this.moveStep.bind(this);
@@ -86,6 +83,27 @@ class CreationLogin extends React.Component {
                   <Segment stacked>
                     <Form.Input fluid icon={this.state.formContent[this.state.step].icon} value={this.state.input} iconPosition="left" placeholder={this.state.formContent[this.state.step].placeHolder} onChange={(e) => this.changeInput(e)}/>
 
+                    <Menu vertical style={{visibility: this.state.step === 1 ? "visible" : "hidden"}}>
+                      <Dropdown item text='Grade Levels'>
+                        <Dropdown.Menu>
+                          <Dropdown.Item> PreK </Dropdown.Item>
+                          <Dropdown.Item> Kindergarten </Dropdown.Item>
+                          <Dropdown.Item> 1st </Dropdown.Item>
+                          <Dropdown.Item> 2nd </Dropdown.Item>
+                          <Dropdown.Item> 3rd </Dropdown.Item>
+                          <Dropdown.Item> 4th </Dropdown.Item>
+                          <Dropdown.Item> 5th </Dropdown.Item>
+                          <Dropdown.Item> 6th </Dropdown.Item>
+                          <Dropdown.Item> 7th </Dropdown.Item>
+                          <Dropdown.Item> 8th </Dropdown.Item>
+                          <Dropdown.Item> 9th </Dropdown.Item>
+                          <Dropdown.Item> 10th </Dropdown.Item>
+                          <Dropdown.Item> 11th </Dropdown.Item>
+                          <Dropdown.Item> 12th </Dropdown.Item>
+                        </Dropdown.Menu>
+                      </Dropdown>
+                    </Menu>
+  
                     <Button color="teal" fluid size="large" onClick={() => this.setAttribute(this.state.input)} style={{ marginTop: "3em" }} style={{visibility: this.state.step === 1 || this.state.step === 2 ? "visible" : "hidden"}}>
                     {this.state.formContent[this.state.step].text2}
                     </Button>
