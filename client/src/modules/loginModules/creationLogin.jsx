@@ -44,7 +44,7 @@ class CreationLogin extends React.Component {
       return;
     } else if (this.state.step === 0) {
       this.setState({ schoolName: input},() => {
-        moveStep(1)
+        this.moveStep(1)
       });
     } else if (this.state.step === 1) {
       this.state.gradeLevels.push(input);
@@ -90,7 +90,7 @@ class CreationLogin extends React.Component {
                     {this.state.formContent[this.state.step].text2}
                     </Button>
 
-                    <Button color="teal" fluid size="large" onClick={() => this.moveStep(1)} style={{ marginTop: "3em" }}>
+                    <Button color="teal" fluid size="large" onClick={() => this.submit()} style={{ marginTop: "3em" }}>
                       {this.state.formContent[this.state.step].text}
                     </Button>
 
