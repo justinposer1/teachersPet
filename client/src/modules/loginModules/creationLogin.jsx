@@ -81,10 +81,10 @@ class CreationLogin extends React.Component {
                 </Header>
                 <Form size="large">
                   <Segment stacked>
-                    <Form.Input fluid icon={this.state.formContent[this.state.step].icon} value={this.state.input} iconPosition="left" placeholder={this.state.formContent[this.state.step].placeHolder} onChange={(e) => this.changeInput(e)}/>
+                    <Form.Input fluid icon={this.state.formContent[this.state.step].icon} value={this.state.input} iconPosition="left" placeholder={this.state.formContent[this.state.step].placeHolder} onChange={(e) => this.changeInput(e)} style={{visibility: this.state.step === 1 ? "hidden" : "visible"}}/>
 
                     <Menu vertical style={{visibility: this.state.step === 1 ? "visible" : "hidden"}}>
-                      <Dropdown item text='Grade Levels'>
+                      <Dropdown item text='Grade Levels' onChange={(e) => this.changeInput(e)>
                         <Dropdown.Menu>
                           <Dropdown.Item> PreK </Dropdown.Item>
                           <Dropdown.Item> Kindergarten </Dropdown.Item>
