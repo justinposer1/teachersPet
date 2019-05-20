@@ -29,6 +29,23 @@ class CreationLogin extends React.Component {
 
     this.moveStep = this.moveStep.bind(this);
     this.changeInput = this.changeInput.bind(this);
+
+    this.grades = [
+      { key: 'prek', text: 'PreK', value: 'PreK' },
+      { key: 'Kindergarten', text: 'Kindergarten', value: 'Kindergarten' },
+      { key: '1st', text: '1st', value: '1st' },
+      { key: '2nd', text: '2nd', value: '2nd' },
+      { key: '3rd', text: '3rd', value: 'html' },
+      { key: '4th', text: '4th', value: '4th' },
+      { key: '5th', text: '5th', value: '5th' },
+      { key: '6th', text: '6th', value: '6th' },
+      { key: '7th', text: '7th', value: '7th' },
+      { key: '8th', text: '8th', value: '8th' },
+      { key: '9th', text: '9th', value: '9th' },
+      { key: '10th', text: '10th', value: '10th' },
+      { key: '11th', text: '11th', value: '11th' },
+      { key: '12th', text: '12th', value: '12th' }
+    ];
   }
 
   moveStep(num) {
@@ -84,24 +101,7 @@ class CreationLogin extends React.Component {
                     <Form.Input fluid icon={this.state.formContent[this.state.step].icon} value={this.state.input} iconPosition="left" placeholder={this.state.formContent[this.state.step].placeHolder} onChange={(e) => this.changeInput(e)} style={{visibility: this.state.step === 1 ? "hidden" : "visible"}}/>
 
                     <Menu vertical style={{visibility: this.state.step === 1 ? "visible" : "hidden"}}>
-                      <Dropdown item text='Grade Levels' onChange={(e) => this.changeInput(e)>
-                        <Dropdown.Menu>
-                          <Dropdown.Item> PreK </Dropdown.Item>
-                          <Dropdown.Item> Kindergarten </Dropdown.Item>
-                          <Dropdown.Item> 1st </Dropdown.Item>
-                          <Dropdown.Item> 2nd </Dropdown.Item>
-                          <Dropdown.Item> 3rd </Dropdown.Item>
-                          <Dropdown.Item> 4th </Dropdown.Item>
-                          <Dropdown.Item> 5th </Dropdown.Item>
-                          <Dropdown.Item> 6th </Dropdown.Item>
-                          <Dropdown.Item> 7th </Dropdown.Item>
-                          <Dropdown.Item> 8th </Dropdown.Item>
-                          <Dropdown.Item> 9th </Dropdown.Item>
-                          <Dropdown.Item> 10th </Dropdown.Item>
-                          <Dropdown.Item> 11th </Dropdown.Item>
-                          <Dropdown.Item> 12th </Dropdown.Item>
-                        </Dropdown.Menu>
-                      </Dropdown>
+                      <Dropdown placeholder='Add Grade Levels' fluid mulitple selection options={this.grades}/>
                     </Menu>
   
                     <Button color="teal" fluid size="large" onClick={() => this.setAttribute(this.state.input)} style={{ marginTop: "3em" }} style={{visibility: this.state.step === 1 || this.state.step === 2 ? "visible" : "hidden"}}>
