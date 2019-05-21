@@ -6,7 +6,6 @@ import {
   Grid,
   Header,
   Segment,
-  Menu,
   Dropdown
 } from "semantic-ui-react";
 import CompletionBar from "./completionBar.jsx"
@@ -82,6 +81,11 @@ class CreationLogin extends React.Component {
     }
   }
 
+  handleChange(e, { value }) {
+    console.log(e, value)
+    this.setAttribute(value);
+  } 
+
   render() {
     return (
       <div className="creation-form">
@@ -100,11 +104,9 @@ class CreationLogin extends React.Component {
                   <Segment stacked>
                     <Form.Input fluid icon={this.state.formContent[this.state.step].icon} value={this.state.input} iconPosition="left" placeholder={this.state.formContent[this.state.step].placeHolder} onChange={(e) => this.changeInput(e)} style={{visibility: this.state.step === 1 ? "hidden" : "visible"}}/>
 
-                    <Menu vertical style={{visibility: this.state.step === 1 ? "visible" : "hidden"}}>
-                      <Dropdown placeholder='Add Grade Levels' fluid mulitple selection options={this.grades}/>
-                    </Menu>
+                    <Dropdown onChange={this.handleChange} placeholder='Add Grade Levels' multiple selection fluid options={this.grades} value={this.state.gradeLevels} style={{width: "38.5em", visibility: this.state.step === 1 ? "visible" : "hidden"}}/>
   
-                    <Button color="teal" fluid size="large" onClick={() => this.setAttribute(this.state.input)} style={{ marginTop: "3em" }} style={{visibility: this.state.step === 1 || this.state.step === 2 ? "visible" : "hidden"}}>
+                    <Button color="teal" fluid size="large" onClick={() => this.setAttribute(this.state.input)} style={{ marginTop: "3em" }} style={{visibility: this.state.step === 2 ? "visible" : "hidden"}}>
                     {this.state.formContent[this.state.step].text2}
                     </Button>
 
