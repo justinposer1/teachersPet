@@ -53,7 +53,7 @@ class CreationLogin extends React.Component {
   }
 
   setAttribute(input) {
-    if (!this.state.input) {
+    if (!input) {
       this.setState({warning: true});
       return;
     } else if (this.state.step === 0) {
