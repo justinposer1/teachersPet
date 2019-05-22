@@ -35,7 +35,7 @@ class CreationLogin extends React.Component {
       { key: 'Kindergarten', text: 'Kindergarten', value: 'Kindergarten' },
       { key: '1st', text: '1st', value: '1st' },
       { key: '2nd', text: '2nd', value: '2nd' },
-      { key: '3rd', text: '3rd', value: 'html' },
+      { key: '3rd', text: '3rd', value: '3rd' },
       { key: '4th', text: '4th', value: '4th' },
       { key: '5th', text: '5th', value: '5th' },
       { key: '6th', text: '6th', value: '6th' },
@@ -61,7 +61,7 @@ class CreationLogin extends React.Component {
         this.moveStep(1)
       });
     } else if (this.state.step === 1) {
-      this.state.gradeLevels.push(input);
+      this.state.gradeLevels = input;
     } else if (this.state.step === 2) {
       this.state.verifiedEmails[input] = true;
     } else if (this.state.step === 3) {
