@@ -55,7 +55,8 @@ class CreationLogin extends React.Component {
         this.setState({warning: true});
         return;
       }
-
+      let newGrades = this.sortGrades(this.state.gradeLevels);
+      this.setState({step: this.state.step + num, input: "", gradeLevels: newGrades});
     }
     this.setState({step: this.state.step + num, input: ""});
   }
@@ -96,7 +97,34 @@ class CreationLogin extends React.Component {
   }
 
   sortGrades(grades) {
-    
+    let order = {
+     'PreK' : 0,
+     'Kindergarten' : 1,
+     '1st' : 2, 
+     '2nd' : 3, 
+     '3rd' : 4, 
+     '4th' : 5, 
+     '5th' : 6, 
+     '6th' : 7, 
+     '7th' : 8, 
+     '8th' : 9,
+     '9th' : 10, 
+     '10th' : 11,
+     '11th' : 12,
+     '12th' : 13,
+    };
+
+    let newArray = [];
+    grades.forEach((grade) => {newArray[order[grade]] = grade});
+    let i = 0;
+    while (i < newArray.length) {
+      if (!newArray[i]) {
+        newArray.splice(i, 1);
+      } else {
+        i++;
+      }
+    }
+    return newArray;
   }
 
   render() {
