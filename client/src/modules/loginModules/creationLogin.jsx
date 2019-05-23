@@ -46,9 +46,17 @@ class CreationLogin extends React.Component {
       { key: '11th', text: '11th', value: '11th' },
       { key: '12th', text: '12th', value: '12th' }
     ];
+
   }
 
   moveStep(num) {
+    if (this.state.step === 1) {
+      if (!this.state.gradeLevels) {
+        this.setState({warning: true});
+        return;
+      }
+
+    }
     this.setState({step: this.state.step + num, input: ""});
   }
 
@@ -85,7 +93,11 @@ class CreationLogin extends React.Component {
   handleChange(e, value) {
     console.log(e, value)
     this.setAttribute(value);
-  } 
+  }
+
+  sortGrades(grades) {
+    
+  }
 
   render() {
     return (
