@@ -50,7 +50,7 @@ class CreationLogin extends React.Component {
   }
 
   moveStep(num) {
-    if (this.state.step === 1) {
+    if (this.state.step === 1 && num === 1) {
       if (!this.state.gradeLevels) {
         this.setState({warning: true});
         return;
@@ -115,7 +115,7 @@ class CreationLogin extends React.Component {
     };
 
     let newArray = [];
-    grades.forEach((grade) => {newArray[order[grade]] = grade});
+    grades.forEach((grade) => {newArray[order[grade]] = " " + grade});
     let i = 0;
     while (i < newArray.length) {
       if (!newArray[i]) {
@@ -155,7 +155,9 @@ class CreationLogin extends React.Component {
                       {this.state.formContent[this.state.step].text}
                     </Button>
 
-                    
+                    <Button color="teal" fluid size="large" onClick={() => this.moveStep(-1)} style={{ marginTop: "3em" }} style={{visibility: this.state.step === 0 ?  "hidden" : "visible"}}>
+                      Go back
+                    </Button>
                     
                   </Segment>
                 </Form>
