@@ -8,7 +8,7 @@ const CompletionBar = props => {
         <Icon name="building outline" />
         <Step.Content>
           <Step.Title>School Name</Step.Title>
-          <Step.Description> {props.schoolName || "Input your school's name!"} </Step.Description>
+          <Step.Description> {props.step < 1 ? "Input your school's name!" : props.schoolName} </Step.Description>
         </Step.Content>
       </Step>
 

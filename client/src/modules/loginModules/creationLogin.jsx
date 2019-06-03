@@ -6,7 +6,8 @@ import {
   Grid,
   Header,
   Segment,
-  Dropdown
+  Dropdown,
+  Message
 } from "semantic-ui-react";
 import CompletionBar from "./completionBar.jsx"
 import axios from "axios";
@@ -141,9 +142,11 @@ class CreationLogin extends React.Component {
                 <Header as="h2" color="teal" textAlign="center">
                   Follow the instructions to set up your school's site on teachersPet:
                 </Header>
-                <Form size="large">
+                <Form size="large" warning>
                   <Segment stacked>
                     <Form.Input fluid icon={this.state.formContent[this.state.step].icon} value={this.state.input} iconPosition="left" placeholder={this.state.formContent[this.state.step].placeHolder} onChange={(e) => this.changeInput(e)} style={{visibility: this.state.step === 1 ? "hidden" : "visible"}}/>
+
+                    <Message error header='Invalid Input' content='You can only sign up for an account once with a given e-mail address.' size="large"/>
 
                     <Dropdown onChange={(e, { value }) => this.handleChange(e, value)} placeholder='Add Grade Levels' multiple selection fluid options={this.grades} values={this.state.gradeLevels} style={{width: "38.5em", visibility: this.state.step === 1 ? "visible" : "hidden"}}/>
   
@@ -151,11 +154,11 @@ class CreationLogin extends React.Component {
                     {this.state.formContent[this.state.step].text2}
                     </Button>
 
-                    <Button color="teal" fluid size="large" onClick={() => this.submit()} style={{ marginTop: "3em" }}>
+                    <Button color="teal" fluid size="large" onClick={() => this.submit()} style={{ marginTop: "3em", marginBottom: "1em" }}>
                       {this.state.formContent[this.state.step].text}
                     </Button>
 
-                    <Button color="teal" fluid size="large" onClick={() => this.moveStep(-1)} style={{ marginTop: "3em" }} style={{visibility: this.state.step === 0 ?  "hidden" : "visible"}}>
+                    <Button color="teal" fluid size="large" onClick={() => this.moveStep(-1)} style={{ marginTop: "1em" }} style={{visibility: this.state.step === 0 ?  "hidden" : "visible"}}>
                       Go back
                     </Button>
                     
