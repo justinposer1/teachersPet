@@ -146,11 +146,11 @@ class CreationLogin extends React.Component {
                   <Segment stacked>
                     <Form.Input fluid icon={this.state.formContent[this.state.step].icon} value={this.state.input} iconPosition="left" placeholder={this.state.formContent[this.state.step].placeHolder} onChange={(e) => this.changeInput(e)} style={{visibility: this.state.step === 1 ? "hidden" : "visible"}}/>
 
-                    <Message error={this.state.error} header='Invalid Input' content="Please enter your school's name." size="large" style={{visibility: this.state.error ? "visible" : "hidden"}}/>
+                    <Message error={this.state.error} header='Invalid Input' content="Please enter your school's name." size="large" style={{display: this.state.error ? "block" : "none"}}/>
 
-                    <Dropdown onChange={(e, { value }) => this.handleChange(e, value)} placeholder='Add Grade Levels' multiple selection fluid options={this.grades} values={this.state.gradeLevels} style={{width: "38.5em", visibility: this.state.step === 1 ? "visible" : "hidden"}}/>
+                    <Dropdown onChange={(e, { value }) => this.handleChange(e, value)} placeholder='Add Grade Levels' multiple selection fluid options={this.grades} values={this.state.gradeLevels} style={{width: "38.5em", display: this.state.step === 1 ? "block" : "none"}}/>
   
-                    <Button color="teal" fluid size="large" onClick={() => this.setAttribute(this.state.input)} style={{ marginTop: "3em" }} style={{visibility: this.state.step === 2 ? "visible" : "hidden"}}>
+                    <Button color="teal" fluid size="large" onClick={() => this.setAttribute(this.state.input)} style={{ marginTop: "3em" }} style={{display: this.state.step === 2 ? "block" : "none"}}>
                     {this.state.formContent[this.state.step].text2}
                     </Button>
 
@@ -158,7 +158,7 @@ class CreationLogin extends React.Component {
                       {this.state.formContent[this.state.step].text}
                     </Button>
 
-                    <Button color="teal" fluid size="large" onClick={() => this.moveStep(-1)} style={{ marginTop: "1em" }} style={{visibility: this.state.step === 0 ?  "hidden" : "visible"}}>
+                    <Button color="teal" fluid size="large" onClick={() => this.moveStep(-1)} style={{ marginTop: "1em" }} style={{display: this.state.step === 0 ?  "none" : "block"}}>
                       Go back
                     </Button>
                     
