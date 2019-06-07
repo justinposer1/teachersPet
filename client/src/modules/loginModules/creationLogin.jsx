@@ -146,7 +146,7 @@ class CreationLogin extends React.Component {
                   <Segment stacked>
                     <Form.Input fluid icon={this.state.formContent[this.state.step].icon} value={this.state.input} iconPosition="left" placeholder={this.state.formContent[this.state.step].placeHolder} onChange={(e) => this.changeInput(e)} style={{visibility: this.state.step === 1 ? "hidden" : "visible"}}/>
 
-                    <Message error={!this.state.error} header='Invalid Input' content="Please enter your school's name." size="large"/>
+                    <Message error={this.state.error} header='Invalid Input' content="Please enter your school's name." size="large" style={{visibility: this.state.error ? "visible" : "hidden"}}/>
 
                     <Dropdown onChange={(e, { value }) => this.handleChange(e, value)} placeholder='Add Grade Levels' multiple selection fluid options={this.grades} values={this.state.gradeLevels} style={{width: "38.5em", visibility: this.state.step === 1 ? "visible" : "hidden"}}/>
   
