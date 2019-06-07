@@ -58,8 +58,11 @@ class CreationLogin extends React.Component {
       }
       let newGrades = this.sortGrades(this.state.gradeLevels);
       this.setState({step: this.state.step + num, input: "", gradeLevels: newGrades});
+    } else if (this.state.step === 2 && num === 1 && Object.keys(this.state.verifiedEmails).length === 0) {
+      this.setState({error: true});
+        return;
     }
-    this.setState({step: this.state.step + num, input: ""});
+    this.setState({step: this.state.step + num, input: "", warning: false});
   }
 
   setAttribute(input) {
@@ -131,6 +134,7 @@ class CreationLogin extends React.Component {
   render() {
     return (
       <div className="creation-form">
+            <CompletionBar step={this.state.step} moveStep={this.moveStep} schoolName={this.state.schoolName} gradeLevels={this.state.gradeLevels} verifiedEmails={this.state.verifiedEmails}/>
             <Grid textAlign="center" style={{ height: "100%", marginTop: "3em", marginBottom: "10em" }} verticalAlign="middle">
               <Grid.Column style={{ maxWidth: 600 }}>
                 <div>
@@ -167,7 +171,6 @@ class CreationLogin extends React.Component {
                 
               </Grid.Column>
             </Grid>
-            <CompletionBar step={this.state.step} moveStep={this.moveStep} schoolName={this.state.schoolName} gradeLevels={this.state.gradeLevels} verifiedEmails={this.state.verifiedEmails}/>
           </div>
     )
   }
