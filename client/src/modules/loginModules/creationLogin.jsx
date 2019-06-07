@@ -23,7 +23,7 @@ class CreationLogin extends React.Component {
       verifiedEmails: {},
       verifiedCode: false,
       input: "",
-      warning: false,
+      error: false,
       formContent: {0: {icon: "building outline", placeHolder: "enter your school's name", text: "Submit your school's name"}, 1: {icon: "building outline", placeHolder: "enter your school's grade levels", text: "Submit your school's grade levels", text2: "Add grade level"}, 2: {icon: "users", placeHolder: "enter emails of staff members", text: "Submit approved emails", text2: "Add staff email"}, 3: {icon: "lock", placeHolder: "enter the code sent to you by teachersPet", text: "Verify"}}
     };
 
@@ -53,7 +53,7 @@ class CreationLogin extends React.Component {
   moveStep(num) {
     if (this.state.step === 1 && num === 1) {
       if (!this.state.gradeLevels) {
-        this.setState({warning: true});
+        this.setState({error: true});
         return;
       }
       let newGrades = this.sortGrades(this.state.gradeLevels);
@@ -64,7 +64,7 @@ class CreationLogin extends React.Component {
 
   setAttribute(input) {
     if (!input) {
-      this.setState({warning: true});
+      this.setState({error: true});
       return;
     } else if (this.state.step === 0) {
       this.setState({ schoolName: input},() => {
@@ -77,7 +77,7 @@ class CreationLogin extends React.Component {
     } else if (this.state.step === 3) {
       // fill in authentication logic
     }
-    this.setState({warning: false, input: ""})
+    this.setState({error: false, input: ""})
   }
 
   changeInput(e) {
@@ -142,11 +142,11 @@ class CreationLogin extends React.Component {
                 <Header as="h2" color="teal" textAlign="center">
                   Follow the instructions to set up your school's site on teachersPet:
                 </Header>
-                <Form size="large" warning>
+                <Form size="large" error>
                   <Segment stacked>
                     <Form.Input fluid icon={this.state.formContent[this.state.step].icon} value={this.state.input} iconPosition="left" placeholder={this.state.formContent[this.state.step].placeHolder} onChange={(e) => this.changeInput(e)} style={{visibility: this.state.step === 1 ? "hidden" : "visible"}}/>
 
-                    <Message error header='Invalid Input' content='You can only sign up for an account once with a given e-mail address.' size="large"/>
+                    <Message error={!this.state.error} header='Invalid Input' content="Please enter your school's name." size="large"/>
 
                     <Dropdown onChange={(e, { value }) => this.handleChange(e, value)} placeholder='Add Grade Levels' multiple selection fluid options={this.grades} values={this.state.gradeLevels} style={{width: "38.5em", visibility: this.state.step === 1 ? "visible" : "hidden"}}/>
   
