@@ -24,7 +24,7 @@ class CreationLogin extends React.Component {
       verifiedCode: false,
       input: "",
       error: false,
-      formContent: {0: {icon: "building outline", placeHolder: "enter your school's name", text: "Submit your school's name"}, 1: {icon: "building outline", placeHolder: "enter your school's grade levels", text: "Submit your school's grade levels", text2: "Add grade level"}, 2: {icon: "users", placeHolder: "enter emails of staff members", text: "Submit approved emails", text2: "Add staff email"}, 3: {icon: "lock", placeHolder: "enter the code sent to you by teachersPet", text: "Verify"}}
+      stepContent: {0: {icon: "building outline", placeHolder: "enter your school's name", text: "Submit your school's name", error: "Please enter your school's name"}, 1: {icon: "building outline", placeHolder: "enter your school's grade levels", text: "Submit your school's grade levels", text2: "Add grade level", error: "Please add at least one grade level"}, 2: {icon: "users", placeHolder: "enter emails of staff members", text: "Submit approved emails", text2: "Add staff email", error: "Please add at least one valid email"}, 3: {icon: "lock", placeHolder: "enter the code sent to you by teachersPet", text: "Verify"}}
     };
 
     this.moveStep = this.moveStep.bind(this);
@@ -76,7 +76,13 @@ class CreationLogin extends React.Component {
     } else if (this.state.step === 1) {
       this.state.gradeLevels = input;
     } else if (this.state.step === 2) {
-      this.state.verifiedEmails[input] = true;
+        if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(input)) {
+          this.state.verifiedEmails[input] = true;
+        } else {
+          alert("You have entered an invalid email address!")
+          this.setState({error: true});
+          return;
+        }
     } else if (this.state.step === 3) {
       // fill in authentication logic
     }
@@ -148,18 +154,18 @@ class CreationLogin extends React.Component {
                 </Header>
                 <Form size="large" error>
                   <Segment stacked>
-                    <Form.Input fluid icon={this.state.formContent[this.state.step].icon} value={this.state.input} iconPosition="left" placeholder={this.state.formContent[this.state.step].placeHolder} onChange={(e) => this.changeInput(e)} style={{visibility: this.state.step === 1 ? "hidden" : "visible"}}/>
+                    <Form.Input fluid icon={this.state.stepContent[this.state.step].icon} value={this.state.input} iconPosition="left" placeholder={this.state.stepContent[this.state.step].placeHolder} onChange={(e) => this.changeInput(e)} style={{visibility: this.state.step === 1 ? "hidden" : "visible"}}/>
 
-                    <Message error={this.state.error} header='Invalid Input' content="Please enter your school's name." size="large" style={{display: this.state.error ? "block" : "none"}}/>
+                    <Message error={this.state.error} content={this.state.stepContent[this.state.step].error} size="large" style={{display: this.state.error ? "block" : "none"}}/>
 
                     <Dropdown onChange={(e, { value }) => this.handleChange(e, value)} placeholder='Add Grade Levels' multiple selection fluid options={this.grades} values={this.state.gradeLevels} style={{width: "38.5em", display: this.state.step === 1 ? "block" : "none"}}/>
   
                     <Button color="teal" fluid size="large" onClick={() => this.setAttribute(this.state.input)} style={{ marginTop: "3em" }} style={{display: this.state.step === 2 ? "block" : "none"}}>
-                    {this.state.formContent[this.state.step].text2}
+                    {this.state.stepContent[this.state.step].text2}
                     </Button>
 
                     <Button color="teal" fluid size="large" onClick={() => this.submit()} style={{ marginTop: "3em", marginBottom: "1em" }}>
-                      {this.state.formContent[this.state.step].text}
+                      {this.state.stepContent[this.state.step].text}
                     </Button>
 
                     <Button color="teal" fluid size="large" onClick={() => this.moveStep(-1)} style={{ marginTop: "1em" }} style={{display: this.state.step === 0 ?  "none" : "block"}}>
