@@ -52,7 +52,6 @@ class CreationLogin extends React.Component {
 
   moveStep(num) {
     if (this.state.step === 1 && num === 1) {
-      console.log(this.state.gradeLevels)
       if (this.state.gradeLevels.length === 0) {
         this.setState({error: true});
         return;
@@ -80,7 +79,6 @@ class CreationLogin extends React.Component {
         if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(input)) {
           this.state.verifiedEmails[input] = true;
         } else {
-          alert("You have entered an invalid email address!")
           this.setState({error: true});
           return;
         }
@@ -161,11 +159,11 @@ class CreationLogin extends React.Component {
 
                     <Message error={this.state.error} content={this.state.stepContent[this.state.step].error} size="large" style={{display: this.state.error ? "block" : "none"}}/>
   
-                    <Button color="teal" fluid size="large" onClick={() => this.setAttribute(this.state.input)} style={{ marginTop: "3em" }} style={{display: this.state.step === 2 ? "block" : "none"}}>
+                    <Button color="teal" fluid size="large" onClick={() => this.setAttribute(this.state.input)} style={{display: this.state.step === 2 ? "block" : "none"}}>
                     {this.state.stepContent[this.state.step].text2}
                     </Button>
 
-                    <Button color="teal" fluid size="large" onClick={() => this.submit()} style={{ marginTop: "3em", marginBottom: "1em" }}>
+                    <Button color="teal" fluid size="large" onClick={() => this.submit()} style={{ marginTop: "1em", marginBottom: "1em" }}>
                       {this.state.stepContent[this.state.step].text}
                     </Button>
 
