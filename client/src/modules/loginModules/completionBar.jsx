@@ -16,7 +16,7 @@ const CompletionBar = props => {
         <Icon name="book" />
         <Step.Content>
           <Step.Title>Grade Levels</Step.Title>
-          <Step.Description> {props.step < 2 ?  "Input your school's grade levels" : `Grades: ${props.gradeLevels}`} </Step.Description>
+          <Step.Description> {props.step < 2 ?  "Input your school's grade levels" : `Grade${!props.gradeLevels[1]? '' : 's'}: ${props.gradeLevels}`} </Step.Description>
         </Step.Content>
       </Step>
 

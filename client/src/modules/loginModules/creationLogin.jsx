@@ -33,7 +33,7 @@ class CreationLogin extends React.Component {
 
     this.grades = [
       { key: 'prek', text: 'PreK', value: 'PreK' },
-      { key: 'Kindergarten', text: 'Kindergarten', value: 'Kindergarten' },
+      { key: 'kindergarten', text: 'Kindergarten', value: 'Kindergarten' },
       { key: '1st', text: '1st', value: '1st' },
       { key: '2nd', text: '2nd', value: '2nd' },
       { key: '3rd', text: '3rd', value: '3rd' },
@@ -52,7 +52,8 @@ class CreationLogin extends React.Component {
 
   moveStep(num) {
     if (this.state.step === 1 && num === 1) {
-      if (!this.state.gradeLevels) {
+      console.log(this.state.gradeLevels)
+      if (this.state.gradeLevels.length === 0) {
         this.setState({error: true});
         return;
       }
@@ -156,9 +157,9 @@ class CreationLogin extends React.Component {
                   <Segment stacked>
                     <Form.Input fluid icon={this.state.stepContent[this.state.step].icon} value={this.state.input} iconPosition="left" placeholder={this.state.stepContent[this.state.step].placeHolder} onChange={(e) => this.changeInput(e)} style={{visibility: this.state.step === 1 ? "hidden" : "visible"}}/>
 
-                    <Message error={this.state.error} content={this.state.stepContent[this.state.step].error} size="large" style={{display: this.state.error ? "block" : "none"}}/>
-
                     <Dropdown onChange={(e, { value }) => this.handleChange(e, value)} placeholder='Add Grade Levels' multiple selection fluid options={this.grades} values={this.state.gradeLevels} style={{width: "38.5em", display: this.state.step === 1 ? "block" : "none"}}/>
+
+                    <Message error={this.state.error} content={this.state.stepContent[this.state.step].error} size="large" style={{display: this.state.error ? "block" : "none"}}/>
   
                     <Button color="teal" fluid size="large" onClick={() => this.setAttribute(this.state.input)} style={{ marginTop: "3em" }} style={{display: this.state.step === 2 ? "block" : "none"}}>
                     {this.state.stepContent[this.state.step].text2}
