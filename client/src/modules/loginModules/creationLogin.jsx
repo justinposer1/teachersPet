@@ -153,7 +153,7 @@ class CreationLogin extends React.Component {
                 </Header>
                 <Form size="large" error>
                   <Segment stacked>
-                    <Form.Input fluid icon={this.state.stepContent[this.state.step].icon} value={this.state.input} iconPosition="left" placeholder={this.state.stepContent[this.state.step].placeHolder} onChange={(e) => this.changeInput(e)} style={{visibility: this.state.step === 1 ? "hidden" : "visible"}}/>
+                    <Form.Input fluid icon={this.state.stepContent[this.state.step].icon} value={this.state.input} iconPosition="left" placeholder={this.state.stepContent[this.state.step].placeHolder} onChange={(e) => this.changeInput(e)} style={this.state.step === 1 ? {display: "none"} : {}}/>
 
                     <Dropdown onChange={(e, { value }) => this.handleChange(e, value)} placeholder='Add Grade Levels' multiple selection fluid options={this.grades} values={this.state.gradeLevels} style={{width: "38.5em", display: this.state.step === 1 ? "block" : "none"}}/>
 
