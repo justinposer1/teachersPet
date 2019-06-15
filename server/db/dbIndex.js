@@ -1,5 +1,6 @@
 
 const pg = require("pg");
+const fs = require('fs');
 
 const pool = new pg.Pool({
   user: "teacherspet",
@@ -40,12 +41,16 @@ const createTables = () => {
         if (err) {
           return console.error("Error acquiring client", err.stack);
         }
-        client.query('CREATE TABLE exampletable(id SERIAL PRIMARY KEY, firstName VARCHAR(40) NOT NULL,lastName VARCHAR(40) NOT NULL)', (err, result) => {
+        client.query(query, (err, result) => {
       
           release();
           if (err) {
-            return console.error("Error creating database", err.stack);
+            return console.error("Error creating tables", err.stack);
           }
         });
       });
 }
+
+const query = fs.readFileSync('./server/db/schema.sql').toString();
+
+// 'CREATE TABLE exampletable(id SERIAL PRIMARY KEY, firstName VARCHAR(40) NOT NULL,lastName VARCHAR(40) NOT NULL) CREATE TABLE exampletable2(id SERIAL PRIMARY KEY, firstName VARCHAR(40) NOT NULL,lastName VARCHAR(40) NOT NULL)'
