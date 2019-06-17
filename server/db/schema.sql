@@ -36,19 +36,31 @@ CREATE TABLE courses (
 );
 
 CREATE TABLE gradeLevels (
-  name varchar(50) NOT NULL,
-  admin_id varchar(50) FOREIGN KEY,
+  level integer NOT NULL,
+  admin_id integer FOREIGN KEY,
   PRIMARY KEY (ID)
 );
 
 CREATE TABLE deparments (
   name varchar(50) NOT NULL,
-  admin varchar(50) FOREIGN KEY,
+  admin_id integer FOREIGN KEY,
   PRIMARY KEY (ID)
 );
 
 CREATE TABLE semesters (
   name varchar(50) NOT NULL,
-  admin varchar(50) FOREIGN KEY,
+  admin_id integer FOREIGN KEY,
   PRIMARY KEY (ID)
 );
+
+CREATE TABLE notes (
+  name varchar(50) NOT NULL,
+  text varchar(500)
+  staff_id integer FOREIGN KEY,
+  student_id integer FOREIGN KEY,
+  private boolean,
+  flagged boolean,
+  archived boolean,
+  PRIMARY KEY (ID)
+);
+

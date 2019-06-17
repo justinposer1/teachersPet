@@ -1,6 +1,7 @@
 
 const pg = require("pg");
 const fs = require('fs');
+const query = fs.readFileSync('./server/db/schema.sql').toString();
 
 const pool = new pg.Pool({
   user: "teacherspet",
@@ -51,6 +52,3 @@ const createTables = () => {
       });
 }
 
-const query = fs.readFileSync('./server/db/schema.sql').toString();
-
-// 'CREATE TABLE exampletable(id SERIAL PRIMARY KEY, firstName VARCHAR(40) NOT NULL,lastName VARCHAR(40) NOT NULL) CREATE TABLE exampletable2(id SERIAL PRIMARY KEY, firstName VARCHAR(40) NOT NULL,lastName VARCHAR(40) NOT NULL)'
