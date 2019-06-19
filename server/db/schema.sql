@@ -17,7 +17,7 @@ CREATE TABLE students (
   grade_id integer FOREIGN KEY,
   email varchar(50),
   homeless boolean,
-  fosterCare boolean,
+  inFosterCare boolean,
   currently enrolled boolean,
   firstJoined date NOT NULL,
   latestDeparture date,
@@ -55,7 +55,7 @@ CREATE TABLE semesters (
 
 CREATE TABLE notes (
   name varchar(50) NOT NULL,
-  text varchar(500)
+  text varchar(500),
   staff_id integer FOREIGN KEY,
   student_id integer FOREIGN KEY,
   private boolean,
@@ -64,3 +64,14 @@ CREATE TABLE notes (
   PRIMARY KEY (ID)
 );
 
+CREATE TABLE staff_gradeLevels (
+  staff_id integer FOREIGN KEY,
+  gradeLevel_id integer FOREIGN KEY,
+  PRIMARY KEY (ID)
+);
+
+CREATE TABLE staff_courses (
+  staff_id integer FOREIGN KEY,
+  course_id integer FOREIGN KEY,
+  PRIMARY KEY (ID)
+);
