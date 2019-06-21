@@ -62,7 +62,8 @@ class CreationLogin extends React.Component {
       this.setState({error: true});
         return;
     }
-    this.setState({step: this.state.step + num, input: "", warning: false});
+    console.log(num)
+    this.setState({step: this.state.step + num, input: "", error: false});
   }
 
   setAttribute(input) {
@@ -149,7 +150,7 @@ class CreationLogin extends React.Component {
                   </Header>
                 </div>
                 <Header as="h2" color="teal" textAlign="center">
-                  Follow the instructions to set up your school's site on teachersPet:
+                  Follow the instructions to set up your school's site:
                 </Header>
                 <Form size="large" error>
                   <Segment stacked>
