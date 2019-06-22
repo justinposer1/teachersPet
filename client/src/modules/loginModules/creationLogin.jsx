@@ -32,20 +32,20 @@ class CreationLogin extends React.Component {
     this.setAttribute = this.setAttribute.bind(this);
 
     this.grades = [
-      { key: 'prek', text: 'PreK', value: 'PreK' },
-      { key: 'kindergarten', text: 'Kindergarten', value: 'Kindergarten' },
-      { key: '1st', text: '1st', value: '1st' },
-      { key: '2nd', text: '2nd', value: '2nd' },
-      { key: '3rd', text: '3rd', value: '3rd' },
-      { key: '4th', text: '4th', value: '4th' },
-      { key: '5th', text: '5th', value: '5th' },
-      { key: '6th', text: '6th', value: '6th' },
-      { key: '7th', text: '7th', value: '7th' },
-      { key: '8th', text: '8th', value: '8th' },
-      { key: '9th', text: '9th', value: '9th' },
-      { key: '10th', text: '10th', value: '10th' },
-      { key: '11th', text: '11th', value: '11th' },
-      { key: '12th', text: '12th', value: '12th' }
+      { key: ' prek', text: ' PreK', value: ' PreK' },
+      { key: ' kindergarten', text: ' Kindergarten', value: ' Kindergarten' },
+      { key: ' 1st', text: ' 1st', value: ' 1st' },
+      { key: ' 2nd', text: ' 2nd', value: ' 2nd' },
+      { key: ' 3rd', text: ' 3rd', value: ' 3rd' },
+      { key: ' 4th', text: ' 4th', value: ' 4th' },
+      { key: ' 5th', text: ' 5th', value: ' 5th' },
+      { key: ' 6th', text: ' 6th', value: ' 6th' },
+      { key: ' 7th', text: ' 7th', value: ' 7th' },
+      { key: ' 8th', text: ' 8th', value: ' 8th' },
+      { key: ' 9th', text: ' 9th', value: ' 9th' },
+      { key: ' 10th', text: ' 10th', value: ' 10th' },
+      { key: ' 11th', text: ' 11th', value: ' 11th' },
+      { key: ' 12th', text: ' 12th', value: ' 12th' }
     ];
 
   }
@@ -115,20 +115,20 @@ class CreationLogin extends React.Component {
 
   sortGrades(grades) {
     let order = {
-     'PreK' : 0,
-     'Kindergarten' : 1,
-     '1st' : 2, 
-     '2nd' : 3, 
-     '3rd' : 4, 
-     '4th' : 5, 
-     '5th' : 6, 
-     '6th' : 7, 
-     '7th' : 8, 
-     '8th' : 9,
-     '9th' : 10, 
-     '10th' : 11,
-     '11th' : 12,
-     '12th' : 13,
+     ' PreK' : 0,
+     ' Kindergarten' : 1,
+     ' 1st' : 2, 
+     ' 2nd' : 3, 
+     ' 3rd' : 4, 
+     ' 4th' : 5, 
+     ' 5th' : 6, 
+     ' 6th' : 7, 
+     ' 7th' : 8, 
+     ' 8th' : 9,
+     ' 9th' : 10, 
+     ' 10th' : 11,
+     ' 11th' : 12,
+     ' 12th' : 13,
     };
 
     let newArray = [];
