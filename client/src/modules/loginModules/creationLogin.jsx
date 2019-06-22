@@ -62,8 +62,15 @@ class CreationLogin extends React.Component {
       this.setState({error: true});
         return;
     }
-    console.log(num)
-    this.setState({step: this.state.step + num, input: "", error: false});
+    let newInput = "";
+    if (num === -1) {
+      if (this.state.step === 1) {
+        newInput = this.state.schoolName;
+      } else if (this.state.step === 2) {
+        newInput = this.state.gradeLevels;
+      }
+    }
+    this.setState({step: this.state.step + num, input: newInput, error: false});
   }
 
   setAttribute(input) {
@@ -75,7 +82,8 @@ class CreationLogin extends React.Component {
         this.moveStep(1)
       });
     } else if (this.state.step === 1) {
-      this.state.gradeLevels = input;
+      console.log(input)
+      this.setState({ gradeLevels: input });
     } else if (this.state.step === 2) {
         if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(input)) {
           this.state.verifiedEmails[input] = true;
@@ -86,7 +94,7 @@ class CreationLogin extends React.Component {
     } else if (this.state.step === 3) {
       // fill in authentication logic
     }
-    this.setState({error: false, input: ""})
+    this.setState({error: false, input: ""});
   }
 
   changeInput(e) {
@@ -102,7 +110,6 @@ class CreationLogin extends React.Component {
   }
 
   handleChange(e, value) {
-    console.log(e, value)
     this.setAttribute(value);
   }
 
@@ -125,7 +132,7 @@ class CreationLogin extends React.Component {
     };
 
     let newArray = [];
-    grades.forEach((grade) => {newArray[order[grade]] = " " + grade});
+    grades.forEach((grade) => {newArray[order[grade]] = grade});
     let i = 0;
     while (i < newArray.length) {
       if (!newArray[i]) {
