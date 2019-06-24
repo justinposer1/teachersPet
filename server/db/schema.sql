@@ -8,6 +8,7 @@ CREATE TABLE staff (
   hashedPassword varchar(50) NOT NULL,
   firstJoined date NOT NULL,
   latestDeparture date,
+  deparment_id integer FOREIGN KEY references departments (id),
   PRIMARY KEY (id)
 );
 
@@ -69,6 +70,13 @@ CREATE TABLE grades (
   student_id integer FOREIGN KEY references students (id),
   course_id integer FOREIGN KEY courses references courses (id),
   grade decimal (3, 2),
+  commentsLink varchar(50),
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE staff_students (
+  staff_id integer FOREIGN KEY references staff (id),
+  students_id integer FOREIGN KEY references studentss (id),
   PRIMARY KEY (id)
 );
 
