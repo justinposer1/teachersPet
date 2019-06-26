@@ -24,7 +24,7 @@ class CreationLogin extends React.Component {
       verifiedCode: false,
       input: "",
       error: false,
-      stepContent: {0: {icon: "building outline", placeHolder: "enter your school's name", text: "Submit your school's name", error: "Please enter your school's name"}, 1: {icon: "building outline", placeHolder: "enter your school's grade levels", text: "Submit your school's grade levels", text2: "Add grade level", error: "Please add at least one grade level"}, 2: {icon: "users", placeHolder: "enter emails of staff members", text: "Submit approved emails", text2: "Add staff email", error: "Please add at least one valid email"}, 3: {icon: "lock", placeHolder: "enter the code sent to you by teachersPet", text: "Verify"}}
+      stepContent: {0: {icon: "building outline", placeHolder: "enter your school's name", text: "Submit your school's name", error: "Please enter your school's name"}, 1: {icon: "building outline", placeHolder: "enter your school's grade levels", text: "Submit your school's grade levels", text2: "Add grade level", error: "Please add at least one grade level"}, 2: {icon: "users", placeHolder: "enter emails of staff members", text: "Submit approved emails", text2: "Add staff email", error: "Please add at least one valid email"}, 3: {icon: "lock", placeHolder: "enter the code sent to you by teachersPet", text: "Verify", error: "Code not verified. Please try again or reach out to your contact at teachersPet"}}
     };
 
     this.moveStep = this.moveStep.bind(this);
@@ -67,8 +67,9 @@ class CreationLogin extends React.Component {
           if (res.verified) {
             this.props.changeAttribute('message', `Verified! Creating your school's database`);
             this.props.changeAttribute('page', 'loadingScreen');
+          } else {
+            this.setState({error: true});
           }
-
         })
     } else {
       if (num === -1) {

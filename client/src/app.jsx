@@ -48,7 +48,7 @@ class App extends React.Component {
       )
     } else if (this.state.currentView === 'loadingScreen') {
       return (
-        <LoadingScreen changeAttribute={this.changeAttribute}/>
+        <LoadingScreen changeAttribute={this.changeAttribute} message={this.state.message}/>
       )
     }
     
