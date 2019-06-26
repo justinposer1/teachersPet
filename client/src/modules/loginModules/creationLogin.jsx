@@ -7,9 +7,12 @@ import {
   Header,
   Segment,
   Dropdown,
-  Message
+  Message,
+  Dimmer,
+  Loader
 } from "semantic-ui-react";
-import CompletionBar from "./completionBar.jsx"
+import CompletionBar from "./completionBar.jsx";
+import LoadingScreen from '../utility/loadingScreen.jsx';
 import axios from "axios";
 
 
@@ -24,7 +27,9 @@ class CreationLogin extends React.Component {
       verifiedCode: false,
       input: "",
       error: false,
-      stepContent: {0: {icon: "building outline", placeHolder: "enter your school's name", text: "Submit your school's name", error: "Please enter your school's name"}, 1: {icon: "building outline", placeHolder: "enter your school's grade levels", text: "Submit your school's grade levels", text2: "Add grade level", error: "Please add at least one grade level"}, 2: {icon: "users", placeHolder: "enter emails of staff members", text: "Submit approved emails", text2: "Add staff email", error: "Please add at least one valid email"}, 3: {icon: "lock", placeHolder: "enter the code sent to you by teachersPet", text: "Verify", error: "Code not verified. Please try again or reach out to your contact at teachersPet"}}
+      stepContent: {0: {icon: "building outline", placeHolder: "enter your school's name", text: "Submit your school's name", error: "Please enter your school's name"}, 1: {icon: "building outline", placeHolder: "enter your school's grade levels", text: "Submit your school's grade levels", text2: "Add grade level", error: "Please add at least one grade level"}, 2: {icon: "users", placeHolder: "enter emails of staff members", text: "Submit approved emails", text2: "Add staff email", error: "Please add at least one valid email"}, 3: {icon: "lock", placeHolder: "enter the code sent to you by teachersPet", text: "Verify", error: "Code not verified. Please try again or reach out to your contact at teachersPet."}},
+      message: `Verified! Creating your school's database`,
+      loading: false
     };
 
     this.moveStep = this.moveStep.bind(this);
@@ -65,15 +70,18 @@ class CreationLogin extends React.Component {
       axios.get('/createDatabase', { schoolName: this.state.schoolName, gradeLevels: this.state.gradeLevels, code: this.state.input})
         .then((res) => {
           if (res.verified) {
-            this.props.changeAttribute('message', `Verified! Creating your school's database`);
-            this.props.changeAttribute('page', 'loadingScreen');
+            this.setState({loading: true});
           } else {
             this.setState({error: true});
           }
         })
+        .catch((err) => {
+          console.log(err);
+          this.setState({error: true});
+        })
     } else {
+      let prevInput = "";
       if (num === -1) {
-        let prevInput = "";
         if (this.state.step === 1) {
           prevInput = this.state.schoolName;
         } else if (this.state.step === 2) {
@@ -190,7 +198,7 @@ class CreationLogin extends React.Component {
                     
                   </Segment>
                 </Form>
-                
+                <LoadingScreen message={this.state.message} active={this.state.loading}/>
               </Grid.Column>
             </Grid>
           </div>

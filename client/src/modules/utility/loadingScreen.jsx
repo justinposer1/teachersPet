@@ -1,7 +1,13 @@
 
 import React from 'react';
-import { Loader } from 'semantic-ui-react';
+import { Loader, Dimmer } from 'semantic-ui-react';
 
-const LoadingScreen = (props) => <Loader size='massive' active inline='centered'> {props.message} </Loader>;
+const LoadingScreen = (props) => {
+    return (
+        <Dimmer active={props.active} page>
+            <Loader size='massive' inline='centered'> {props.message} </Loader>
+        </Dimmer>
+    )
+};
 
 export default LoadingScreen;

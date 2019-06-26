@@ -4,7 +4,6 @@ import ReactDOM from 'react-dom';
 // import axios from 'axios';
 import Login from './modules/loginModules/login.jsx';
 import CreationLogin from './modules/loginModules/creationLogin.jsx';
-import LoadingScreen from './modules/utility/loadingScreen.jsx';
 import '../../node_modules/semantic-ui-css/semantic.min.css';
 
 
@@ -12,7 +11,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentView: 'loadingScreen',
+      currentView: 'creationLogin',
       theme: 'default',
       message: ''
     }
@@ -45,10 +44,6 @@ class App extends React.Component {
     } else if (this.state.currentView === 'creationLogin') {
       return (
         <CreationLogin changeAttribute={this.changeAttribute}/>
-      )
-    } else if (this.state.currentView === 'loadingScreen') {
-      return (
-        <LoadingScreen changeAttribute={this.changeAttribute} message={this.state.message}/>
       )
     }
     

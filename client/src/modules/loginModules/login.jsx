@@ -79,9 +79,6 @@ class Login extends React.Component {
             </Message>
           </Grid.Column>
         </Grid>
-        {/* <Input placeholder='Search...' onChange={this.changeInput}/>
-            <Button onClick={this.changeDisplayed}/>
-            <h2> hi {this.state.displayed}</h2> */}
       </div>
     );
   }
