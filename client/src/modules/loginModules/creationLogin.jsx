@@ -64,7 +64,10 @@ class CreationLogin extends React.Component {
     } else if (this.state.step === 3) {
       axios.get('/createDatabase', { schoolName: this.state.schoolName, gradeLevels: this.state.gradeLevels, code: this.state.input})
         .then((res) => {
-          
+          if (res.verified) {
+            this.props.changeAttribute('message', `Verified! Creating your school's database`);
+            this.props.changeAttribute('page', 'loadingScreen');
+          }
 
         })
     } else {
