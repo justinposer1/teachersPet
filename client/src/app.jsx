@@ -11,7 +11,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentView: 'CreationLogin',
+      currentView: 'creationLogin',
       theme: 'default'
     }
 
@@ -36,11 +36,11 @@ class App extends React.Component {
   }
 
   render() {
-    if (this.state.currentView === 'Login') {
+    if (this.state.currentView === 'login') {
       return (
         <Login propsPackage={this.propsPackage}/>
       )
-    } else if (this.state.currentView === 'CreationLogin') {
+    } else if (this.state.currentView === 'creationLogin') {
       return (
         <CreationLogin/>
       )

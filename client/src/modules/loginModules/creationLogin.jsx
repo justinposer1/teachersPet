@@ -61,16 +61,23 @@ class CreationLogin extends React.Component {
     } else if (this.state.step === 2 && num === 1 && Object.keys(this.state.verifiedEmails).length === 0) {
       this.setState({error: true});
         return;
-    }
-    let newInput = "";
-    if (num === -1) {
-      if (this.state.step === 1) {
-        newInput = this.state.schoolName;
-      } else if (this.state.step === 2) {
-        newInput = this.state.gradeLevels;
+    } else if (this.state.step === 3) {
+      axios.get('/createDatabase', { schoolName: this.state.schoolName, gradeLevels: this.state.gradeLevels, code: this.state.input})
+        .then((res) => {
+          
+
+        })
+    } else {
+      if (num === -1) {
+        let prevInput = "";
+        if (this.state.step === 1) {
+          prevInput = this.state.schoolName;
+        } else if (this.state.step === 2) {
+          prevInput = this.state.gradeLevels;
+        }
       }
+      this.setState({step: this.state.step + num, input: prevInput, error: false});
     }
-    this.setState({step: this.state.step + num, input: newInput, error: false});
   }
 
   setAttribute(input) {
@@ -91,8 +98,6 @@ class CreationLogin extends React.Component {
           this.setState({error: true});
           return;
         }
-    } else if (this.state.step === 3) {
-      // fill in authentication logic
     }
     this.setState({error: false, input: ""});
   }
