@@ -1,9 +1,7 @@
 
-var Movie = require("../db/models/movie.js");
-var Review = require("../db/models/review.js");
-var Genre = require("../db/models/genre.js");
+const {verify, createDatabase } = require('../db/dbIndex.js');
 
-exports.retrieveAllMovies = (req, res) => {
+exports.verify = (req, res) => {
   Movie.where({})
     .fetchAll()
     .then(found => {
@@ -14,3 +12,7 @@ exports.retrieveAllMovies = (req, res) => {
       }
     });
 };
+
+exports.createDatabase = (req, res) => {
+
+}
