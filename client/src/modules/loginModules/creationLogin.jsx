@@ -27,8 +27,9 @@ class CreationLogin extends React.Component {
       verifiedCode: false,
       input: "",
       error: false,
-      stepContent: {0: {icon: "building outline", placeHolder: "enter your school's name", text: "Submit your school's name", error: "Please enter your school's name"}, 1: {icon: "building outline", placeHolder: "enter your school's grade levels", text: "Submit your school's grade levels", text2: "Add grade level", error: "Please add at least one grade level"}, 2: {icon: "users", placeHolder: "enter emails of staff members", text: "Submit approved emails", text2: "Add staff email", error: "Please add at least one valid email"}, 3: {icon: "lock", placeHolder: "enter the code sent to you by teachersPet", text: "Verify", error: "Code not verified. Please try again or reach out to your contact at teachersPet."}},
-      message: `Verified! Creating your school's database...`,
+      stepContent: {0: {icon: "building outline", placeHolder: "enter your school's name", text: "Submit your school's name", error: "Please enter your school's name"}, 1: {icon: "building outline", placeHolder: "enter your school's grade levels", text: "Submit your school's grade levels", text2: "Add grade level"}, 2: {icon: "users", placeHolder: "enter emails of staff members", text: "Submit approved emails", text2: "Add staff email" }, 3: {icon: "lock", placeHolder: "enter the code sent to you by teachersPet", text: "Verify"}},
+      errorMessage: '',
+      message: '',
       loading: false
     };
 
@@ -58,26 +59,29 @@ class CreationLogin extends React.Component {
   moveStep(num) {
     if (this.state.step === 1 && num === 1) {
       if (this.state.gradeLevels.length === 0) {
-        this.setState({error: true});
+        this.setState({ error: true, errorMessage: "Please add at least one grade level" });
         return;
       }
       let newGrades = this.sortGrades(this.state.gradeLevels);
       this.setState({step: this.state.step + num, input: "", gradeLevels: newGrades});
     } else if (this.state.step === 2 && num === 1 && Object.keys(this.state.verifiedEmails).length === 0) {
-      this.setState({error: true});
+      this.setState({ error: true, errorMessage: "Please add at least one valid email" });
         return;
     } else if (this.state.step === 3) {
-      axios.post('/verifyCode', { schoolName: this.state.schoolName, gradeLevels: this.state.gradeLevels, code: this.state.input})
+      if (!this.state.input) {
+        return;
+      }
+      axios.post('/verifyCode', { code: this.state.input })
         .then((res) => {
           if (res.verified) {
-            this.setState({loading: true});
+            this.setState({loading: true, message: `Verified! Creating your school's database...` });
           } else {
-            this.setState({error: true});
+            this.setState({ error: true, errorMessage: "Code not verified. Please try again or reach out to your contact at teachersPet." });
           }
         })
         .catch((err) => {
           console.log(err);
-          this.setState({error: true});
+          this.setState({ error: true, errorMessage: "There was a problem connecting to the server. Please check your connection and try again." });
         })
     } else {
       let prevInput = "";
@@ -94,7 +98,6 @@ class CreationLogin extends React.Component {
 
   setAttribute(input) {
     if (!input) {
-      this.setState({error: true});
       return;
     } else if (this.state.step === 0) {
       this.setState({ schoolName: input},() => {
@@ -106,7 +109,7 @@ class CreationLogin extends React.Component {
         if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(input)) {
           this.state.verifiedEmails[input] = true;
         } else {
-          this.setState({error: true});
+          this.setState({error: true, errorMessage: 'Email not valid.'});
           return;
         }
     }
@@ -181,7 +184,7 @@ class CreationLogin extends React.Component {
 
                     <Dropdown onChange={(e, { value }) => this.handleChange(e, value)} placeholder='Add Grade Levels' multiple selection fluid options={this.grades} values={this.state.gradeLevels} style={{width: "38.5em", display: this.state.step === 1 ? "block" : "none"}}/>
 
-                    <Message error={this.state.error} content={this.state.stepContent[this.state.step].error} size="large" style={{display: this.state.error ? "block" : "none"}}/>
+                    <Message error={this.state.error} content={this.state.errorMessage} size="large" style={{display: this.state.error ? "block" : "none"}}/>
   
                     <Button color="teal" fluid size="large" onClick={() => this.setAttribute(this.state.input)} style={{display: this.state.step === 2 ? "block" : "none"}}>
                     {this.state.stepContent[this.state.step].text2}

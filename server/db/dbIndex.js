@@ -3,7 +3,11 @@ const pg = require("pg");
 const fs = require('fs');
 const query = fs.readFileSync('./server/db/schema.sql').toString();
 
-const pool = new pg.Pool({
+db.verify = (code) => {
+
+}
+
+let pool = new pg.Pool({
   user: "teacherspet",
   host: "127.0.0.1",
   database: "postgres",
@@ -52,3 +56,4 @@ const createTables = () => {
       });
 };
 
+module.exports = db;
