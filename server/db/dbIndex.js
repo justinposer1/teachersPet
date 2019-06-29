@@ -3,8 +3,29 @@ const pg = require("pg");
 const fs = require('fs');
 const query = fs.readFileSync('./server/db/schema.sql').toString();
 
-db.verify = (code) => {
+db.verify = (code, email) => {
+  let pool = new pg.Pool({
+    user: "teacherspet",
+    host: "127.0.0.1",
+    database: "postgres",
+    password: process.env.pgPassword,
+    port: "5432"
+  });
 
+  pool.connect((err, client, release) => {
+    if (err) {
+      return console.error("Error acquiring client", err.stack);
+    }
+    client.query(`SELECT `, (err, result) => {
+  
+      release();
+      if (err) {
+        return console.error("Error creating database", err.stack);
+      } else {
+          
+      }
+    });
+  })
 }
 
 let pool = new pg.Pool({

@@ -9,7 +9,7 @@ CREATE TABLE staff (
   firstJoined date NOT NULL,
   latestDeparture date,
   deparment_id integer FOREIGN KEY references departments (id),
-  PRIMARY KEY (id)
+  id serial PRIMARY KEY
 );
 
 CREATE TABLE students (
@@ -23,7 +23,7 @@ CREATE TABLE students (
   firstJoined date NOT NULL,
   latestDeparture date,
   IEPLink varchar(50),
-  PRIMARY KEY (id)
+  id serial PRIMARY KEY
 );
 
 CREATE TABLE courses (
@@ -33,26 +33,26 @@ CREATE TABLE courses (
   honors boolean,
   deparment_id integer FOREIGN KEY references departments (id),
   semester_id integer FOREIGN KEY references semesters (id),
-  PRIMARY KEY (id)
+  id serial PRIMARY KEY
 );
 
 CREATE TABLE gradeLevels (
   level integer NOT NULL,
   admin_id integer FOREIGN KEY references staff (id),
-  PRIMARY KEY (id)
+  id serial PRIMARY KEY
 );
 
 CREATE TABLE deparments (
   name varchar(50) NOT NULL,
   admin_id integer FOREIGN KEY references staff (id),
-  PRIMARY KEY (id)
+  id serial PRIMARY KEY
 );
 
 CREATE TABLE semesters (
   startDate date NOT NULL,
   endDate date NOT NULL,
   admin_id integer FOREIGN KEY references staff (id),
-  PRIMARY KEY (id)
+  id serial PRIMARY KEY
 );
 
 CREATE TABLE notes (
@@ -63,7 +63,7 @@ CREATE TABLE notes (
   private boolean,
   flagged boolean,
   archived boolean,
-  PRIMARY KEY (id)
+  id serial PRIMARY KEY
 );
 
 CREATE TABLE grades (
@@ -71,24 +71,23 @@ CREATE TABLE grades (
   course_id integer FOREIGN KEY courses references courses (id),
   grade decimal (3, 2),
   commentsLink varchar(50),
-  PRIMARY KEY (id)
+  id serial PRIMARY KEY
 );
 
 CREATE TABLE staff_students (
   staff_id integer FOREIGN KEY references staff (id),
   students_id integer FOREIGN KEY references studentss (id),
-  PRIMARY KEY (id)
+  id serial PRIMARY KEY
 );
 
 CREATE TABLE staff_gradeLevels (
   staff_id integer FOREIGN KEY references staff (id),
   gradeLevel_id integer FOREIGN KEY references gradeLevels (id),
-  PRIMARY KEY (id)
+  id serial PRIMARY KEY
 );
 
 CREATE TABLE staff_courses (
   staff_id integer FOREIGN KEY references staff (id),
   course_id integer FOREIGN KEY references courses (id),
-  PRIMARY KEY (id)
+  id serial PRIMARY KEY
 );
-
