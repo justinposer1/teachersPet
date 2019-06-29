@@ -74,6 +74,14 @@ CREATE TABLE grades (
   id serial PRIMARY KEY
 );
 
+CREATE TABLE messages (
+  sender_id integer FOREIGN KEY references staff (id),
+  recipient_id integer FOREIGN KEY references staff (id),
+  subjectLine varchar(50),
+  text varchar(500),
+  id serial PRIMARY KEY
+);
+
 CREATE TABLE staff_students (
   staff_id integer FOREIGN KEY references staff (id),
   students_id integer FOREIGN KEY references studentss (id),
