@@ -68,6 +68,7 @@ class CreationLogin extends React.Component {
       if (!this.state.input) {
         return;
       }
+      this.setState({loading: true, message: 'Verifying submitted code...'});
       axios.post('/verifyCode', { code: this.state.input, email: this.state.adminEmail })
         .then((res) => {
           if (res.verified) {
