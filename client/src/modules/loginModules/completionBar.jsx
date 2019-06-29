@@ -3,14 +3,13 @@ import { Icon, Grid, Step } from "semantic-ui-react";
 
 const CompletionBar = props => {
   let numGrades = props.gradeLevels.length;
-  let numStaff = Object.keys(props.verifiedEmails).length;
   return (
     <Step.Group fluid>
       <Step className={props.step < 1 ? "active" : "completed"}>
         <Icon name="building outline" />
         <Step.Content>
           <Step.Title>School Name</Step.Title>
-          <Step.Description> {props.step < 1 ? "Input your school's name!" : props.schoolName} </Step.Description>
+          <Step.Description> {props.step < 1 ? "Input your school's name" : props.schoolName} </Step.Description>
         </Step.Content>
       </Step>
 
@@ -25,8 +24,8 @@ const CompletionBar = props => {
       <Step className={props.step < 3 ? "active" : "completed"}>
         <Icon name="users" />
         <Step.Content>
-          <Step.Title>Approved Staff</Step.Title>
-          <Step.Description> {props.step < 3 ? "Input staff emails" : `${numStaff} approved staff member${numStaff === 1? '' : 's'}`} </Step.Description>
+          <Step.Title>Primary Admin Email</Step.Title>
+          <Step.Description> {props.step < 3 ? "Input email address of primary admin" : props.adminEmail} </Step.Description>
         </Step.Content>
       </Step>
 

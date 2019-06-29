@@ -23,11 +23,11 @@ class CreationLogin extends React.Component {
       step: 0,
       schoolName: "",
       gradeLevels: [],
-      verifiedEmails: {},
+      adminEmail: '',
       verifiedCode: false,
       input: "",
       error: false,
-      stepContent: {0: {icon: "building outline", placeHolder: "enter your school's name", text: "Submit your school's name", error: "Please enter your school's name"}, 1: {icon: "building outline", placeHolder: "enter your school's grade levels", text: "Submit your school's grade levels", text2: "Add grade level"}, 2: {icon: "users", placeHolder: "enter emails of staff members", text: "Submit approved emails", text2: "Add staff email" }, 3: {icon: "lock", placeHolder: "enter the code sent to you by teachersPet", text: "Verify"}},
+      stepContent: {0: {icon: "building outline", placeHolder: "enter your school's name", text: "Submit your school's name", error: "Please enter your school's name"}, 1: {icon: "building outline", placeHolder: "enter your school's grade levels", text: "Submit your school's grade levels", text2: "Add grade level"}, 2: {icon: "users", placeHolder: "confirm admin email address", text: "Submit admin email" }, 3: {icon: "lock", placeHolder: "enter the code sent to you by teachersPet", text: "Verify"}},
       errorMessage: '',
       message: '',
       loading: false
@@ -64,9 +64,6 @@ class CreationLogin extends React.Component {
       }
       let newGrades = this.sortGrades(this.state.gradeLevels);
       this.setState({step: this.state.step + num, input: "", gradeLevels: newGrades});
-    } else if (this.state.step === 2 && num === 1 && Object.keys(this.state.verifiedEmails).length === 0) {
-      this.setState({ error: true, errorMessage: "Please add at least one valid email" });
-        return;
     } else if (this.state.step === 3) {
       if (!this.state.input) {
         return;
@@ -100,14 +97,16 @@ class CreationLogin extends React.Component {
     if (!input) {
       return;
     } else if (this.state.step === 0) {
-      this.setState({ schoolName: input},() => {
+      this.setState({ schoolName: input }, () => {
         this.moveStep(1)
       });
     } else if (this.state.step === 1) {
       this.setState({ gradeLevels: input });
     } else if (this.state.step === 2) {
         if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(input)) {
-          this.state.verifiedEmails[input] = true;
+          this.setState({ adminEmail: input }, () => {
+            this.moveStep(1)
+          });
         } else {
           this.setState({error: true, errorMessage: 'Email not valid.'});
           return;
@@ -121,7 +120,7 @@ class CreationLogin extends React.Component {
   }
 
   submit() {
-    if (this.state.step === 0) {
+    if (this.state.step === 0 || this.state.step === 2) {
       this.setAttribute(this.state.input);
     } else {
       this.moveStep(1);
@@ -166,7 +165,7 @@ class CreationLogin extends React.Component {
   render() {
     return (
       <div className="creation-form">
-            <CompletionBar step={this.state.step} moveStep={this.moveStep} schoolName={this.state.schoolName} gradeLevels={this.state.gradeLevels} verifiedEmails={this.state.verifiedEmails}/>
+            <CompletionBar step={this.state.step} moveStep={this.moveStep} schoolName={this.state.schoolName} gradeLevels={this.state.gradeLevels} adminEmail={this.state.adminEmail}/>
             <Grid textAlign="center" style={{ height: "100%", marginTop: "3em", marginBottom: "10em" }} verticalAlign="middle">
               <Grid.Column style={{ maxWidth: 600 }}>
                 <div>
@@ -186,9 +185,9 @@ class CreationLogin extends React.Component {
 
                     <Message error={this.state.error} content={this.state.errorMessage} size="large" style={{display: this.state.error ? "block" : "none"}}/>
   
-                    <Button color="teal" fluid size="large" onClick={() => this.setAttribute(this.state.input)} style={{display: this.state.step === 2 ? "block" : "none"}}>
+                    {/* <Button color="teal" fluid size="large" onClick={() => this.setAttribute(this.state.input)} style={{display: this.state.step === 2 ? "block" : "none"}}>
                     {this.state.stepContent[this.state.step].text2}
-                    </Button>
+                    </Button> */}
 
                     <Button color="teal" fluid size="large" onClick={() => this.submit()} style={{ marginTop: "1em", marginBottom: "1em" }}>
                       {this.state.stepContent[this.state.step].text}
