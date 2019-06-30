@@ -2,7 +2,7 @@
 const router = require('express').Router();
 const controller = require('./controller.js');
 
-router.get('/verifyCode')
+router.route('/verifyCode')
     .post(controller.verify);
 
 router.route('/createDatabase')

@@ -71,15 +71,17 @@ class CreationLogin extends React.Component {
       this.setState({loading: true, message: 'Verifying submitted code...'});
       axios.post('/verifyCode', { code: this.state.input, email: this.state.adminEmail })
         .then((res) => {
-          if (res.verified) {
-            this.setState({loading: true, message: `Verified! Creating your school's database...` });
+          if (res.data === false) {
+            this.setState({ loading: true, message: `Verified! Creating your school's database...` });
+          } else if (res.data === true) {
+            this.setState({ loading: false, error: true, errorMessage: "This account has already been activated" });
           } else {
-            this.setState({ error: true, errorMessage: "Code not verified. Please try again or reach out to your contact at teachersPet." });
+            this.setState({ loading: false, error: true, errorMessage: "Code not verified. Please try again or reach out to your contact at teachersPet." });
           }
         })
         .catch((err) => {
           console.log(err);
-          this.setState({ error: true, errorMessage: "There was a problem connecting to the server. Please check your connection and try again." });
+          this.setState({ loading: false, error: true, errorMessage: "There was a problem connecting to the server. Please check your connection and try again." });
         })
     } else {
       let prevInput = "";

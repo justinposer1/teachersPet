@@ -1,13 +1,11 @@
 
 const express = require("express");
 const bodyParser = require("body-parser");
-// const router = require("./router/routes");
+const router = require("./router/routes");
 const path = require("path");
 // const comp = require("compression");
 
 const app = express();
-
-
 
 // app.use(function(req, res, next) {
 //   res.header("Access-Control-Allow-Origin", "*");
@@ -22,7 +20,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, "../Client/dist/")));
 
-// app.use(router);
+app.use(router);
 
 const port = process.env.PORT || 3000;
 
