@@ -99,3 +99,6 @@ CREATE TABLE staff_courses (
   course_id integer FOREIGN KEY references courses (id),
   id serial PRIMARY KEY
 );
+
+
+create table databases (PRIMARY KEY (id), email varchar(30), code varchar(30), hashedPassword varchar(30), activated boolean);

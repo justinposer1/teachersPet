@@ -2,6 +2,8 @@
 const pg = require("pg");
 const fs = require('fs');
 const query = fs.readFileSync('./server/db/schema.sql').toString();
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 const db = {};
 
@@ -84,3 +86,5 @@ db.createDatabase = (name, gradeLevels) => {
 }
 
 module.exports = db;
+
+db.createDatabase("Example School")
