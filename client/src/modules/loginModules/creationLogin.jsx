@@ -71,9 +71,9 @@ class CreationLogin extends React.Component {
       this.setState({loading: true, message: 'Verifying submitted code...'});
       axios.post('/verifyCode', { code: this.state.input, email: this.state.adminEmail })
         .then((res) => {
-          if (res.data === false) {
+          if (res.data.activated === false) {
             this.setState({ loading: true, message: `Verified! Creating your school's database...` });
-          } else if (res.data === true) {
+          } else if (res.data.activated === true) {
             this.setState({ loading: false, error: true, errorMessage: "This account has already been activated" });
           } else {
             this.setState({ loading: false, error: true, errorMessage: "Code not verified. Please try again or reach out to your contact at teachersPet." });

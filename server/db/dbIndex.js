@@ -20,18 +20,21 @@ db.verify = (email, code, callback) => {
     if (err) {
       callback('connection error');
     }
-    client.query(`SELECT activated FROM verificationcodes where  email='${email}' AND code='${code}';`, (err, result) => {
-      
+    client.query(`SELECT id, activated FROM verificationcodes where  email='${email}' AND code='${code}';`, (err, result) => {
+      const res = {};
       release();
       if (err) {
-        callback('connection error');
+        res.message = 'connection error';
       } else {
         if (result.rows.length === 0) {
-          callback('not found');
+          res.message = 'not found';
         } else {
-          callback(result.rows[0].activated);
+          // have to check this
+          res.id = result.rows[0].id;
+          res.activated = result.rows[0].activated;
         }
       }
+      callback(res);
     });
   })
 }
@@ -60,7 +63,7 @@ const createTables = (gradeLevels) => {
     });
 };
 
-db.createDatabase = (name, gradeLevels) => {
+db.createDatabase = (name, gradeLevels, databaseId) => {
   let pool = new pg.Pool({
     user: "teacherspet",
     host: "127.0.0.1",
@@ -73,7 +76,7 @@ db.createDatabase = (name, gradeLevels) => {
     if (err) {
       return console.error("Error acquiring client", err.stack);
     }
-    client.query(`CREATE DATABASE ${name}data`, (err, result) => {
+    client.query(`CREATE DATABASE ${databaseId}data`, (err, result) => {
   
       release();
       if (err) {

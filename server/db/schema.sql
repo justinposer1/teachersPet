@@ -100,5 +100,3 @@ CREATE TABLE staff_courses (
   id serial PRIMARY KEY
 );
 
-
-create table databases (PRIMARY KEY (id), email varchar(30), code varchar(30), hashedPassword varchar(30), activated boolean);
