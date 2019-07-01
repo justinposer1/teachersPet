@@ -89,5 +89,3 @@ db.createDatabase = (name, gradeLevels, databaseId) => {
 }
 
 module.exports = db;
-
-db.createDatabase("Example School")

@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom';
 import Login from './modules/loginModules/login.jsx';
 import CreationLogin from './modules/loginModules/creationLogin.jsx';
 import '../../node_modules/semantic-ui-css/semantic.min.css';
+import HomePage from './modules/userModules/homePage.jsx';
 
 
 class App extends React.Component {
@@ -13,7 +14,8 @@ class App extends React.Component {
     this.state = {
       currentView: 'creationLogin',
       theme: 'default',
-      message: ''
+      message: '',
+      user: {}
     }
 
     this.changeAttribute = this.changeAttribute.bind(this);
@@ -32,6 +34,10 @@ class App extends React.Component {
       this.setState({
         message: input
       });
+    } else if (attribute === 'user') {
+      this.setState({
+        message: input
+      });
     }
     
   }
@@ -44,6 +50,10 @@ class App extends React.Component {
     } else if (this.state.currentView === 'creationLogin') {
       return (
         <CreationLogin changeAttribute={this.changeAttribute}/>
+      )
+    } else if (this.state.currentView === 'homePage') {
+      return (
+        <HomePage changeAttribute={this.changeAttribute}/>
       )
     }
     
