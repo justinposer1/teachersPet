@@ -8,5 +8,7 @@ exports.verify = (req, res) => {
 };
 
 exports.createDatabase = (req, res) => {
-  
+  verify(req.body.gradeLevels, req.body.dbId, req.body.user, (result) => {
+    res.send(result);
+  })
 }

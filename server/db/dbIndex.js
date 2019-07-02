@@ -47,7 +47,7 @@ const createGradeLevelsQuery = (gradeLevels) => {
   return queryString + ';';
 };
 
-const createTables = (gradeLevels) => {
+const createTables = (gradeLevels, user, callback) => {
 
   const newPool = new pg.Pool({
       user: "teacherspet",
@@ -74,9 +74,16 @@ const createTables = (gradeLevels) => {
             if (err) {
               return console.error("Error creating tables", err.stack);
             } else {
-              
+              client.query(`INSERT INTO staff (name, admin, email, hashedPassword, firstJoined) VALUES `, (err, result) => {
+    
+        
+                if (err) {
+                  return console.error("Error creating tables", err.stack);
+                } else {
+                  
+                }
+              });
             }
-            release();
           });
         }
         release();
@@ -84,7 +91,7 @@ const createTables = (gradeLevels) => {
     });
 };
 
-db.createDatabase = (gradeLevels, databaseId) => {
+db.createDatabase = (gradeLevels, databaseId, user, callback) => {
   let pool = new pg.Pool({
     user: "teacherspet",
     host: "127.0.0.1",
@@ -103,7 +110,7 @@ db.createDatabase = (gradeLevels, databaseId) => {
       if (err) {
         return console.error("Error creating database", err.stack);
       } else {
-          createTables(gradeLevels);
+          createTables(gradeLevels, user, callback);
       }
     });
   });
