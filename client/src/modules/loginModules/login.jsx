@@ -1,41 +1,23 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   Icon,
-  Input,
   Button,
   Form,
   Grid,
   Header,
-  Image,
   Message,
   Segment
 } from 'semantic-ui-react';
 import axios from 'axios';
 
-class Login extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: '',
-      password: ''
-    };
-    this.changeInput = this.changeInput.bind(this);
-    this.changeDisplayed = this.changeDisplayed.bind(this);
+export default function Login(props) {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const login = (dbCode, email, password) => {
+    axios.get()
   }
 
-  changeInput(e) {
-    this.setState({
-      input: e.target.value
-    });
-  }
-
-  changeDisplayed() {
-    this.setState({
-      displayed: this.state.input
-    });
-  }
-
-  render() {
     return (
       <div className='login-form'>
         <Grid textAlign='center' style={{ height: '100%', marginTop: '3em' }} verticalAlign='middle' >
@@ -47,12 +29,12 @@ class Login extends React.Component {
               </Header>
             </div>
             <Header as='h2' color='teal' textAlign='center'>
-               {this.props.school}
+               {props.school.name} ({props.school.address})
             </Header>
             <Form size='large'>
               <Segment stacked>
-                <Form.Input fluid icon='user' iconPosition='left' placeholder='E-mail address' />
-                <Form.Input fluid icon='lock' iconPosition='left' placeholder='Password' type='password'/>
+                <Form.Input fluid icon='user' iconPosition='left' placeholder='E-mail address' onChange={(e) => setEmail(e.target.value)}/>
+                <Form.Input fluid icon='lock' iconPosition='left' placeholder='Password' type='password' onChange={(e) => setPassword(e.target.value)}/>
 
                 <Button color='teal' fluid size='large' onClick={() => this.login()}>
                   Login
@@ -67,6 +49,3 @@ class Login extends React.Component {
       </div>
     );
   }
-}
-
-export default Login;

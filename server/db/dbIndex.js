@@ -37,7 +37,15 @@ db.verify = (email, code, callback) => {
       callback(res);
     });
   })
-}
+};
+
+const createGradeLevelsQuery = (gradeLevels) => {
+  let queryString = 'INSERT INTO gradeLevels (level) values';
+  gradeLevels.forEach(gradeLevel => {
+    queryString += `(${gradeLevel})`;
+  });
+  return queryString + ';';
+};
 
 const createTables = (gradeLevels) => {
 
@@ -55,15 +63,28 @@ const createTables = (gradeLevels) => {
       }
       client.query(query, (err, result) => {
     
-        release();
+        
         if (err) {
           return console.error("Error creating tables", err.stack);
+        } else {
+          let gradeQuery = createGradeLevelsQuery(gradeLevels);
+          client.query(gradeQuery, (err, result) => {
+    
+        
+            if (err) {
+              return console.error("Error creating tables", err.stack);
+            } else {
+              
+            }
+            release();
+          });
         }
+        release();
       });
     });
 };
 
-db.createDatabase = (name, gradeLevels, databaseId) => {
+db.createDatabase = (gradeLevels, databaseId) => {
   let pool = new pg.Pool({
     user: "teacherspet",
     host: "127.0.0.1",
@@ -86,6 +107,6 @@ db.createDatabase = (name, gradeLevels, databaseId) => {
       }
     });
   });
-}
+};
 
 module.exports = db;

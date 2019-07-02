@@ -16,7 +16,7 @@ class App extends React.Component {
       theme: 'default',
       message: '',
       user: {},
-      school: {}
+      school: {name: 'Examaple School', address: '25 Example Lane', dbCode: 0}
     }
 
     this.changeAttribute = this.changeAttribute.bind(this);
@@ -50,7 +50,7 @@ class App extends React.Component {
   render() {
     if (this.state.currentView === 'login') {
       return (
-        <Login changeAttribute={this.changeAttribute} school={this.school}/>
+        <Login changeAttribute={this.changeAttribute} school={this.state.school}/>
       )
     } else if (this.state.currentView === 'creationLogin') {
       return (
