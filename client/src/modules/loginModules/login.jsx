@@ -38,11 +38,7 @@ class Login extends React.Component {
   render() {
     return (
       <div className='login-form'>
-        <Grid
-          textAlign='center'
-          style={{ height: '100%', marginTop: '3em' }}
-          verticalAlign='middle'
-        >
+        <Grid textAlign='center' style={{ height: '100%', marginTop: '3em' }} verticalAlign='middle' >
           <Grid.Column style={{ maxWidth: 450 }}>
             <div>
               <Header as='h2' icon textAlign='center'>
@@ -51,31 +47,20 @@ class Login extends React.Component {
               </Header>
             </div>
             <Header as='h2' color='teal' textAlign='center'>
-               Log into your account
+               {this.props.school}
             </Header>
             <Form size='large'>
               <Segment stacked>
-                <Form.Input
-                  fluid
-                  icon='user'
-                  iconPosition='left'
-                  placeholder='E-mail address'
-                />
-                <Form.Input
-                  fluid
-                  icon='lock'
-                  iconPosition='left'
-                  placeholder='Password'
-                  type='password'
-                />
+                <Form.Input fluid icon='user' iconPosition='left' placeholder='E-mail address' />
+                <Form.Input fluid icon='lock' iconPosition='left' placeholder='Password' type='password'/>
 
-                <Button color='teal' fluid size='large'>
+                <Button color='teal' fluid size='large' onClick={() => this.login()}>
                   Login
                 </Button>
               </Segment>
             </Form>
             <Message>
-            If your admin has verified your email, create an account <a href='#' onClick={() => this.props.propsPackage.changeView('CreateAccount')}>here</a>!
+            If your admin has verified your email, create an account <a onClick={() => this.props.propsPackage.changeView('CreateAccount')}>here</a>!
             </Message>
           </Grid.Column>
         </Grid>

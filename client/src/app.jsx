@@ -12,10 +12,11 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentView: 'creationLogin',
+      currentView: 'login',
       theme: 'default',
       message: '',
-      user: {}
+      user: {},
+      school: {}
     }
 
     this.changeAttribute = this.changeAttribute.bind(this);
@@ -36,7 +37,11 @@ class App extends React.Component {
       });
     } else if (attribute === 'user') {
       this.setState({
-        message: input
+        user: input
+      });
+    } else if (attribute === 'school') {
+      this.setState({
+        schoolAddress: input
       });
     }
     
@@ -45,7 +50,7 @@ class App extends React.Component {
   render() {
     if (this.state.currentView === 'login') {
       return (
-        <Login changeAttribute={this.changeAttribute}/>
+        <Login changeAttribute={this.changeAttribute} school={this.school}/>
       )
     } else if (this.state.currentView === 'creationLogin') {
       return (
