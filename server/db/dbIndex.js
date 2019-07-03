@@ -4,6 +4,7 @@ const fs = require('fs');
 const query = fs.readFileSync('./server/db/schema.sql').toString();
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
+const { currentDate } = require('..utilityFunctions/utilityFunctions.js');
 
 const db = {};
 
@@ -74,15 +75,19 @@ const createTables = (gradeLevels, user, callback) => {
             if (err) {
               return console.error("Error creating tables", err.stack);
             } else {
-              client.query(`INSERT INTO staff (name, admin, email, hashedPassword, firstJoined) VALUES `, (err, result) => {
-    
-        
-                if (err) {
-                  return console.error("Error creating tables", err.stack);
-                } else {
-                  
-                }
-              });
+              bcrypt.hash(user.password, saltRounds, (err, hashedPassword) => {
+                
+                client.query(`INSERT INTO staff (name, admin, email, hashedPassword, firstJoined) VALUES (${user.name}, 'true', ${user.email}, ${hashedPassword}, ${Date})`, (err, result) => {
+      
+          
+                  if (err) {
+                    
+                  } else {
+                    
+                  }
+                });
+
+              })
             }
           });
         }
@@ -101,18 +106,22 @@ db.createDatabase = (gradeLevels, databaseId, user, callback) => {
   });
   
   pool.connect((err, client, release) => {
+    var result = {};
     if (err) {
-      return console.error("Error acquiring client", err.stack);
+      result.err = err;
+      callback(result);
+    } else {
+      client.query(`CREATE DATABASE ${databaseId}data`, (result) => {
+    
+        release();
+        if (err) {
+          result.err = err;
+          callback(err);
+        } else {
+            createTables(gradeLevels, user, callback);
+        }
+      });
     }
-    client.query(`CREATE DATABASE ${databaseId}data`, (err, result) => {
-  
-      release();
-      if (err) {
-        return console.error("Error creating database", err.stack);
-      } else {
-          createTables(gradeLevels, user, callback);
-      }
-    });
   });
 };
 
