@@ -1,7 +1,7 @@
 
 const pg = require("pg");
 const fs = require('fs');
-const query = fs.readFileSync('./server/db/schema.sql').toString();
+const tableCreationQuery = fs.readFileSync('./server/db/schema.sql').toString();
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const { currentDate } = require('..utilityFunctions/utilityFunctions.js');
@@ -58,35 +58,40 @@ const createTables = (gradeLevels, user, callback) => {
       port: "5432"
     });
 
+    var result = {};
     newPool.connect((err, client, release) => {
       if (err) {
-        return console.error("Error acquiring client", err.stack);
+        result.err = err;
+        callback(result);
       }
-      client.query(query, (err, result) => {
-    
-        
+      client.query(tableCreationQuery, (err) => {
         if (err) {
-          return console.error("Error creating tables", err.stack);
+          result.err = err;
+          callback(result);
         } else {
           let gradeQuery = createGradeLevelsQuery(gradeLevels);
-          client.query(gradeQuery, (err, result) => {
-    
-        
+          client.query(gradeQuery, (err) => {
             if (err) {
-              return console.error("Error creating tables", err.stack);
+              result.err = err;
+              callback(result);
             } else {
               bcrypt.hash(user.password, saltRounds, (err, hashedPassword) => {
-                
-                client.query(`INSERT INTO staff (name, admin, email, hashedPassword, firstJoined) VALUES (${user.name}, 'true', ${user.email}, ${hashedPassword}, ${Date})`, (err, result) => {
-      
-          
-                  if (err) {
-                    
-                  } else {
-                    
-                  }
-                });
-
+                if (err) {
+                  result.err = err;
+                  callback(result);
+                } else {
+                  let date = currentDate();
+                  client.query(`INSERT INTO staff (name, admin, email, hashedPassword, firstJoined) VALUES (${user.name}, 'true', ${user.email}, ${hashedPassword}, ${date})`, (err) => {
+        
+                    if (err) {
+                      result.err = err;
+                      callback(result);
+                    } else {
+                      result.success = true;
+                      callback(result);
+                    }
+                  });
+                }
               })
             }
           });
@@ -116,9 +121,9 @@ db.createDatabase = (gradeLevels, databaseId, user, callback) => {
         release();
         if (err) {
           result.err = err;
-          callback(err);
+          callback(result);
         } else {
-            createTables(gradeLevels, user, callback);
+          createTables(gradeLevels, user, callback);
         }
       });
     }
