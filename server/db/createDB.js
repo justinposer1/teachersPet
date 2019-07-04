@@ -26,7 +26,7 @@ const createGradeLevelsQuery = (gradeLevels) => {
         port: "5432"
       });
   
-      var result = {};
+      let result = {};
       newPool.connect((err, client, release) => {
         if (err) {
           result.err = err;
