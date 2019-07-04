@@ -5,6 +5,8 @@ const tableCreationQuery = fs.readFileSync('./server/db/schema.sql').toString();
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const { currentDate } = require('../utilityFunctions/utilityFunctions.js');
+const { createPool } = require('../utilityFunctions/utilityFunctions.js');
+
 
 const db = {};
 
@@ -20,7 +22,7 @@ const createGradeLevelsQuery = (gradeLevels) => {
   
     const newPool = new pg.Pool({
         user: "teacherspet",
-        host: "127.0.0.1",
+        host: process.env.dbHost || "127.0.0.1",
         database: `teacherspet${databaseId}`,
         password: process.env.pgPassword,
         port: "5432"
@@ -71,13 +73,7 @@ const createGradeLevelsQuery = (gradeLevels) => {
   };
   
   db.createDatabase = (gradeLevels, databaseId, user, callback) => {
-    let pool = new pg.Pool({
-      user: "teacherspet",
-      host: "127.0.0.1",
-      database: "postgres",
-      password: process.env.pgPassword,
-      port: "5432"
-    });
+    let pool = createPool('postgres');
     
     pool.connect((err, client, release) => {
       var result = {};

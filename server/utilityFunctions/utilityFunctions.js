@@ -10,4 +10,14 @@ utilities.currentDate = () => {
     return current;
 };
 
+utilities.createPool = (database) => {
+    return new pg.Pool({
+      user: "teacherspet",
+      host: process.env.dbHost || "127.0.0.1",
+      database,
+      password: process.env.pgPassword,
+      port: "5432"
+    });
+  };
+
 module.exports = utilities;

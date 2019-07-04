@@ -1,27 +1,18 @@
 
 const pg = require("pg");
-
-const createPool = () => {
-  return new pg.Pool({
-    user: "teacherspet",
-    host: "127.0.0.1",
-    database: "teacherspetdata",
-    password: process.env.pgPassword,
-    port: "5432"
-  });
-};
+const { createPool } = require('../utilityFunctions/utilityFunctions.js');
 
 const db = {};
 
 db.verify = (email, code, callback) => {
-  let pool = createPool();
+  let pool = createPool('teacherspetdata');
   let res = {};
 
   pool.connect((err, client, release) => {
     if (err) {
       res.message = 'connection error';
     } else {
-      client.query(`SELECT id, activated FROM verificationcodes where email='${email}' AND code='${code}';`, (err, result) => {
+      client.query(`SELECT id, activated FROM databases where email='${email}' AND code='${code}';`, (err, result) => {
         
         if (err) {
           res.message = 'connection error';

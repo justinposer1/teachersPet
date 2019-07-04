@@ -3,7 +3,9 @@ const pg = require("pg");
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
-db.login = () => {
+const db = {};
+
+db.login = (code, ) => {
     let pool = createPool();
     let res = {};
   
@@ -29,4 +31,6 @@ db.login = () => {
       release();
       callback(res);
     })
-  }
+  };
+
+  module.exports = db;
