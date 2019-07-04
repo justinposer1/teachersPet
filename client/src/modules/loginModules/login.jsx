@@ -15,7 +15,13 @@ export default function Login(props) {
   const [password, setPassword] = useState('');
 
   const login = (dbCode, email, password) => {
-    axios.get()
+    axios.post('/login', {dbCode, email, password})
+      .then((res) => {
+
+      })
+      .catch((res) => {
+
+      })
   }
 
     return (

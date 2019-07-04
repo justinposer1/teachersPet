@@ -8,4 +8,7 @@ router.route('/verifyCode')
 router.route('/createDatabase')
     .post(controller.createDatabase);
 
+router.route('/login')
+    .get(controller.login);
+
 module.exports = router;
