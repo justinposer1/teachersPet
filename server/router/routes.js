@@ -9,6 +9,6 @@ router.route('/createDatabase')
     .post(controller.createDatabase);
 
 router.route('/login')
-    .get(controller.login);
+    .post(controller.login);
 
 module.exports = router;

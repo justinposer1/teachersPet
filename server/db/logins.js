@@ -1,36 +1,50 @@
-
 const pg = require("pg");
-const bcrypt = require('bcrypt');
-const saltRounds = 10;
+const bcrypt = require("bcrypt");
+const { createPool } = require("../utilityFunctions/utilityFunctions.js");
 
 const db = {};
 
-db.login = (code, ) => {
-    let pool = createPool();
-    let res = {};
-  
-    pool.connect((err, client, release) => {
-      if (err) {
-        res.message = 'connection error';
-      } else {
-        client.query(`SELECT id FROM staff where email='${email}' AND code='${code}';`, (err, result) => {
-          
+db.login = (code, email, password, callback) => {
+  let pool = createPool(`teacherspet${code}`);
+  let res = {};
+
+  pool.connect((err, client, release) => {
+    if (err) {
+      res.message = "connection error";
+      callback(res);
+    } else {
+      client.query(
+        `SELECT id, hashedPassword FROM staff WHERE email='${email}';`,
+        (err, result) => {
           if (err) {
-            res.message = 'connection error';
+            res.message = "connection error";
+            callback(res);
           } else {
             if (result.rows.length === 0) {
-              res.message = 'not found';
+              res.message = "not found";
+              callback(res);
             } else {
-              // have to check this
-              res.id = result.rows[0].id;
-              res.activated = result.rows[0].activated;
+              bcrypt.compare(
+                password,
+                result.rows[0].hashedpassword,
+                (err, match) => {
+                  if (err) {
+                    res.message = err;
+                  } else if (!match) {
+                    res.message = "incorrect password";
+                  } else {
+                    res.success = true;
+                  }
+                  callback(res);
+                }
+              );
             }
           }
-        });
-      }
-      release();
-      callback(res);
-    })
-  };
+        }
+      );
+    }
+    release();
+  });
+};
 
-  module.exports = db;
+module.exports = db;
