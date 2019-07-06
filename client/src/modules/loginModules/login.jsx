@@ -15,12 +15,16 @@ export default function Login(props) {
   const [password, setPassword] = useState('');
 
   const login = (dbCode, email, password) => {
-    axios.post('/login', {dbCode, email, password})
+    axios.post('/login', { dbCode, email, password })
       .then((res) => {
-
+        if (res.data.success) {
+          console.log('success')
+        } else {
+          console.log(res.data.message)
+        }
       })
       .catch((res) => {
-
+        console.log(res)
       })
   }
 
@@ -42,7 +46,7 @@ export default function Login(props) {
                 <Form.Input fluid icon='user' iconPosition='left' placeholder='E-mail address' onChange={(e) => setEmail(e.target.value)}/>
                 <Form.Input fluid icon='lock' iconPosition='left' placeholder='Password' type='password' onChange={(e) => setPassword(e.target.value)}/>
 
-                <Button color='teal' fluid size='large' onClick={() => this.login()}>
+                <Button color='teal' fluid size='large' onClick={() => login(props.school.dbCode, email, password)}>
                   Login
                 </Button>
               </Segment>

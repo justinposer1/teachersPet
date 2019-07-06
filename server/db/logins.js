@@ -1,4 +1,4 @@
-const pg = require("pg");
+
 const bcrypt = require("bcrypt");
 const { createPool } = require("../utilityFunctions/utilityFunctions.js");
 
