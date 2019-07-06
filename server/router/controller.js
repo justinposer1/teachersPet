@@ -10,11 +10,9 @@ exports.verify = (req, res) => {
   })
 };
 
-// exports.createDatabase = (req, res) => {
-//   verify(req.body.gradeLevels, req.body.dbId, req.body.user, (result) => {
-//     res.send(result);
-//   })
-// };
+exports.createDatabase = (req, res) => {
+  
+};
 
 exports.login = (req, res) => {
   login(req.body.dbCode, req.body.email, req.body.password, (result) => {
