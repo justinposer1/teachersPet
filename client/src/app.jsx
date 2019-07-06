@@ -16,7 +16,7 @@ class App extends React.Component {
       theme: 'default',
       message: '',
       user: {},
-      school: {name: 'Examaple School', address: '25 Example Lane', dbCode: 0}
+      school: {name: 'Example School', address: '25 Example Lane', dbCode: 0}
     }
 
     this.changeAttribute = this.changeAttribute.bind(this);

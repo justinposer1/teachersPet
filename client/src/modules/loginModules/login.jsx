@@ -13,13 +13,16 @@ import axios from 'axios';
 export default function Login(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const login = (dbCode, email, password) => {
     axios.post('/login', { dbCode, email, password })
       .then((res) => {
         if (res.data.success) {
-          console.log('success')
+          // go to homepage
         } else {
+          
           console.log(res.data.message)
         }
       })
@@ -49,6 +52,9 @@ export default function Login(props) {
                 <Button color='teal' fluid size='large' onClick={() => login(props.school.dbCode, email, password)}>
                   Login
                 </Button>
+
+                <Message error={error} content={errorMessage} size="large" style={{display: error ? "block" : "none"}}/>
+
               </Segment>
             </Form>
             <Message>
